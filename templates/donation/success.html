@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Success Modal -->
+<div class="modal fade" id="donationSuccessModal" tabindex="-1" aria-labelledby="donationSuccessModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content glass-effect">
+            <div class="modal-body text-center p-4">
+                <div class="success-animation mb-4">
+                    <div class="checkmark">
+                        <svg class="checkmark_stem" height="36" width="36">
+                            <circle class="checkmark_circle" cx="18" cy="18" r="17" fill="none"/>
+                            <path class="checkmark_check" fill="none" d="M7.5 18.5l6 6 15-15"/>
+                        </svg>
+                    </div>
+                </div>
+                <h4 class="mb-3 text-gradient">Merci pour votre don!</h4>
+                <p class="text-muted mb-4">Nous vous contacterons bientôt pour finaliser la transaction.</p>
+                <a href="{% url 'home' %}" class="btn btn-gradient px-4">
+                    <i class="fas fa-home me-2"></i>
+                    Retour à l'accueil
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+    --gradient-start: #6366f1;
+    --gradient-end: #8b5cf6;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+}
+
+/* Glassmorphism Effects */
+.glass-effect {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    box-shadow: var(--glass-shadow);
+}
+
+/* Text Gradient */
+.text-gradient {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Success Animation */
+.success-animation {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+}
+
+.checkmark {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: block;
+    stroke-width: 2;
+    stroke: var(--gradient-start);
+    stroke-miterlimit: 10;
+    box-shadow: inset 0px 0px 0px var(--gradient-start);
+    animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+}
+
+.checkmark_circle {
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    stroke-width: 2;
+    stroke-miterlimit: 10;
+    stroke: var(--gradient-start);
+    fill: none;
+    animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.checkmark_check {
+    transform-origin: 50% 50%;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    stroke: var(--gradient-start);
+    animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+/* Button Styling */
+.btn-gradient {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    border: none;
+    border-radius: 12px;
+    color: white;
+    padding: 1rem 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-gradient:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.25);
+    color: white;
+}
+
+/* Animations */
+@keyframes stroke {
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes scale {
+    0%, 100% {
+        transform: none;
+    }
+    50% {
+        transform: scale3d(1.1, 1.1, 1);
+    }
+}
+
+@keyframes fill {
+    100% {
+        box-shadow: inset 0px 0px 0px 60px var(--gradient-start);
+    }
+}
+
+/* Modal Styling */
+.modal-content {
+    border: none;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.modal-body {
+    padding: 3rem 2rem;
+}
+
+.text-muted {
+    color: var(--text-secondary) !important;
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Show the modal automatically when the page loads
+    const successModal = new bootstrap.Modal(document.getElementById('donationSuccessModal'));
+    successModal.show();
+});
+</script>
+{% endblock %} 

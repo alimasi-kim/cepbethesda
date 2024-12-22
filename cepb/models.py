@@ -259,6 +259,7 @@ class Donation(models.Model):
     donor_name = models.CharField(max_length=200, verbose_name="Nom du donateur")
     donor_email = models.EmailField(verbose_name="Email du donateur")
     purpose = models.CharField(max_length=100, choices=PURPOSE_CHOICES, default='general', verbose_name="Type de don")
+    payment_method = models.ForeignKey('PaymentMethod', on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Moyen de paiement")
     is_anonymous = models.BooleanField(default=False, verbose_name="Don anonyme")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

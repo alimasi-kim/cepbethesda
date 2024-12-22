@@ -7,6 +7,7 @@ from .models import (
     Donation, Gallery, ContactMessage, ContactInfo, Post, PaymentMethod, ServiceSchedule
 )
 from .forms import ContactForm, PrayerRequestForm, DonationForm
+import decimal
 
 def home(request):
     # Récupérer le prochain service
@@ -186,14 +187,27 @@ def donation(request):
     
     initial = {}
     if initial_amount:
-        initial['amount'] = initial_amount
+        try:
+            initial['amount'] = float(initial_amount)
+        except (ValueError, TypeError):
+            pass
     if initial_currency:
         initial['currency'] = initial_currency
     
     if request.method == 'POST':
         form = DonationForm(request.POST)
         if form.is_valid():
-            donation = form.save()
+            # Instead of saving immediately, store the donation data in session
+            donation_data = {
+                'amount': str(form.cleaned_data['amount']),
+                'currency': form.cleaned_data['currency'],
+                'donor_name': form.cleaned_data['donor_name'],
+                'donor_email': form.cleaned_data['donor_email'],
+                'purpose': form.cleaned_data['purpose'],
+                'payment_method': form.cleaned_data['payment_method'].id if form.cleaned_data['payment_method'] else None,
+                'is_anonymous': form.cleaned_data['is_anonymous']
+            }
+            request.session['donation_data'] = donation_data
             messages.success(request, 'Merci pour votre don! Nous vous contacterons bientôt pour finaliser la transaction.')
             return redirect('cepb:donation_success')
     else:
@@ -208,6 +222,36 @@ def donation(request):
     return render(request, 'donation/donation.html', context)
 
 def donation_success(request):
+    # Get donation data from session
+    donation_data = request.session.get('donation_data')
+    
+    if not donation_data:
+        messages.error(request, 'Aucune information de don trouvée.')
+        return redirect('cepb:donation')
+    
+    try:
+        # Get the payment method
+        payment_method = PaymentMethod.objects.get(id=donation_data['payment_method']) if donation_data['payment_method'] else None
+        
+        # Create the donation object
+        donation = Donation(
+            amount=decimal.Decimal(donation_data['amount']),
+            currency=donation_data['currency'],
+            donor_name=donation_data['donor_name'],
+            donor_email=donation_data['donor_email'],
+            purpose=donation_data['purpose'],
+            payment_method=payment_method,
+            is_anonymous=donation_data['is_anonymous']
+        )
+        donation.save()
+        
+        # Clear the session data
+        del request.session['donation_data']
+        
+    except Exception as e:
+        messages.error(request, 'Une erreur est survenue lors de l\'enregistrement de votre don.')
+        return redirect('cepb:donation')
+    
     return render(request, 'donation/success.html')
 
 def donation_cancel(request):

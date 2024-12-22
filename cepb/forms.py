@@ -1,5 +1,5 @@
 from django import forms
-from .models import Church, Activity, News, ContactMessage, Gallery, PrayerRequest, Donation
+from .models import Church, Activity, News, ContactMessage, Gallery, PrayerRequest, Donation, PaymentMethod
 
 class ChurchForm(forms.ModelForm):
     class Meta:
@@ -88,49 +88,55 @@ class PrayerRequestForm(forms.ModelForm):
             'request': forms.Textarea(attrs={'rows': 4}),
         }
 
-class DonationForm(forms.Form):
-    CURRENCY_CHOICES = [
-        ('FC', 'Francs Congolais'),
-        ('USD', 'Dollars US')
-    ]
+class DonationForm(forms.ModelForm):
+    class Meta:
+        model = Donation
+        fields = [
+            'amount',
+            'currency',
+            'donor_name',
+            'donor_email',
+            'purpose',
+            'is_anonymous',
+            'payment_method'
+        ]
+        widgets = {
+            'amount': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Montant',
+                'min': '0',
+                'step': '0.01'
+            }),
+            'currency': forms.Select(attrs={
+                'class': 'form-control'
+            }),
+            'donor_name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Votre nom'
+            }),
+            'donor_email': forms.EmailInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Votre email'
+            }),
+            'purpose': forms.Select(attrs={
+                'class': 'form-control'
+            }),
+            'is_anonymous': forms.CheckboxInput(attrs={
+                'class': 'form-check-input'
+            }),
+            'payment_method': forms.Select(attrs={
+                'class': 'form-control'
+            })
+        }
 
-    PURPOSE_CHOICES = [
-        ('general', 'Don général'),
-        ('mission', 'Soutien aux missions'),
-        ('building', 'Projet de construction'),
-        ('youth', 'Ministère de la jeunesse'),
-        ('other', 'Autre')
-    ]
+    def clean_amount(self):
+        amount = self.cleaned_data.get('amount')
+        if amount is not None and amount <= 0:
+            raise forms.ValidationError("Le montant doit être supérieur à 0.")
+        return amount
 
-    amount = forms.DecimalField(
-        label='Montant',
-        min_value=0,
-        decimal_places=2,
-        widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Entrez le montant'})
-    )
-    currency = forms.ChoiceField(
-        label='Devise',
-        choices=CURRENCY_CHOICES,
-        initial='FC',
-        widget=forms.Select(attrs={'class': 'form-control'})
-    )
-    donor_name = forms.CharField(
-        label='Votre nom',
-        max_length=100,
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Entrez votre nom'})
-    )
-    donor_email = forms.EmailField(
-        label='Votre email',
-        widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Entrez votre email'})
-    )
-    purpose = forms.ChoiceField(
-        label='Type de don',
-        choices=PURPOSE_CHOICES,
-        initial='general',
-        widget=forms.Select(attrs={'class': 'form-control'})
-    )
-    is_anonymous = forms.BooleanField(
-        label='Je souhaite faire un don anonyme',
-        required=False,
-        widget=forms.CheckboxInput(attrs={'class': 'form-check-input'})
-    )
+    def save(self, commit=True):
+        donation = super().save(commit=False)
+        if commit:
+            donation.save()
+        return donation
