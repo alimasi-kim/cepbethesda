@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Supprimer {{ media.title }} - CEPB{% endblock %}
+
+{% block content %}
+<div class="admin-page py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Confirmer la suppression</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            Êtes-vous sûr de vouloir supprimer ce média ? Cette action est irréversible.
+                        </div>
+
+                        <div class="media-preview mb-4">
+                            <h4>{{ media.title }}</h4>
+                            {% if media.media_type == 'photo' %}
+                                <img src="{{ media.image.url }}" alt="{{ media.title }}" class="img-fluid mb-3" style="max-height: 200px;">
+                            {% else %}
+                                {% if media.thumbnail %}
+                                    <img src="{{ media.thumbnail.url }}" alt="{{ media.title }}" class="img-fluid mb-3" style="max-height: 200px;">
+                                {% endif %}
+                                <p><strong>Type :</strong> Vidéo</p>
+                            {% endif %}
+                            <p><strong>Catégorie :</strong> {{ media.get_category_display }}</p>
+                            <p><strong>Date :</strong> {{ media.date }}</p>
+                        </div>
+
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="text-end">
+                                <a href="{% url 'edit_media' media.id %}" class="btn btn-secondary">Annuler</a>
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="fas fa-trash"></i> Confirmer la suppression
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

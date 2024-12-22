@@ -1,0 +1,274 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}{{ title }} | CEPB Admin{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --primary-color: #4CAF50;
+    --secondary-color: #2196F3;
+    --dark-color: #1a1a2e;
+    --light-color: #ffffff;
+    --success-color: #00c853;
+    --warning-color: #ffd600;
+    --error-color: #ff1744;
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+}
+
+body {
+    font-family: 'Poppins', sans-serif !important;
+    background: var(--dark-color) !important;
+    color: var(--light-color) !important;
+}
+
+/* Main Layout */
+#header {
+    background: linear-gradient(135deg, var(--dark-color), #16213e) !important;
+    color: var(--light-color) !important;
+    padding: 1.5rem 2rem !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+#branding h1 {
+    font-weight: 700 !important;
+    font-size: 1.8rem !important;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+.module h2, .module caption, .inline-group h2 {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+    color: var(--light-color) !important;
+    padding: 1rem 1.5rem !important;
+    border-radius: 10px 10px 0 0 !important;
+    font-weight: 600 !important;
+    margin: 0 !important;
+}
+
+/* Navigation */
+#user-tools {
+    font-size: 0.9rem !important;
+    background: var(--glass-bg) !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 50px !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid var(--glass-border) !important;
+}
+
+.module {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-radius: 10px !important;
+    border: 1px solid var(--glass-border) !important;
+    backdrop-filter: blur(10px) !important;
+    margin-bottom: 2rem !important;
+    overflow: hidden !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.module:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Forms and Inputs */
+.form-row {
+    padding: 1rem !important;
+    border-bottom: 1px solid var(--glass-border) !important;
+}
+
+input[type="text"], 
+input[type="password"], 
+input[type="email"], 
+input[type="number"], 
+input[type="url"], 
+input[type="tel"], 
+textarea, 
+select, 
+.vTextField {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid var(--glass-border) !important;
+    border-radius: 8px !important;
+    padding: 0.8rem 1rem !important;
+    color: var(--light-color) !important;
+    transition: all 0.3s ease !important;
+    width: 100% !important;
+}
+
+input[type="text"]:focus, 
+input[type="password"]:focus, 
+input[type="email"]:focus, 
+input[type="number"]:focus, 
+input[type="url"]:focus, 
+input[type="tel"]:focus, 
+textarea:focus, 
+select:focus, 
+.vTextField:focus {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2) !important;
+    outline: none !important;
+}
+
+/* Buttons */
+.button, input[type="submit"], input[type="button"], .submit-row input {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)) !important;
+    color: var(--light-color) !important;
+    border: none !important;
+    padding: 0.8rem 1.5rem !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.button:hover, input[type="submit"]:hover, input[type="button"]:hover, .submit-row input:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3) !important;
+}
+
+/* Tables */
+table {
+    background: rgba(255, 255, 255, 0.02) !important;
+    border-radius: 10px !important;
+    overflow: hidden !important;
+    border: 1px solid var(--glass-border) !important;
+    width: 100% !important;
+}
+
+thead th {
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(33, 150, 243, 0.1)) !important;
+    color: var(--light-color) !important;
+    padding: 1rem !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+}
+
+tbody tr {
+    transition: all 0.3s ease !important;
+}
+
+tbody tr:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+td, th {
+    padding: 12px !important;
+    border-bottom: 1px solid var(--glass-border) !important;
+}
+
+/* Content Area */
+#content {
+    padding: 2rem !important;
+    background: linear-gradient(135deg, rgba(26, 26, 46, 0.95), rgba(22, 33, 62, 0.95)) !important;
+    min-height: 100vh !important;
+}
+
+.breadcrumbs {
+    background: var(--glass-bg) !important;
+    padding: 1rem 1.5rem !important;
+    border-radius: 8px !important;
+    margin-bottom: 2rem !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid var(--glass-border) !important;
+}
+
+/* Links */
+a:link, a:visited {
+    color: var(--secondary-color) !important;
+    text-decoration: none !important;
+    transition: color 0.3s ease !important;
+}
+
+a:hover {
+    color: var(--primary-color) !important;
+}
+
+/* Additional Styles */
+.object-tools {
+    margin-top: 1rem !important;
+}
+
+.object-tools a {
+    background: var(--glass-bg) !important;
+    border: 1px solid var(--glass-border) !important;
+    color: var(--light-color) !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 4px !important;
+    transition: all 0.3s ease !important;
+}
+
+.object-tools a:hover {
+    background: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    transform: translateY(-2px) !important;
+}
+
+.aligned label {
+    color: var(--light-color) !important;
+    font-weight: 500 !important;
+}
+
+.submit-row {
+    background: transparent !important;
+    border: none !important;
+    padding: 1rem 0 !important;
+}
+
+.submit-row a.deletelink {
+    background: var(--error-color) !important;
+}
+
+.submit-row a.deletelink:hover {
+    background: #d32f2f !important;
+}
+
+/* Messages */
+.messagelist {
+    padding: 0 !important;
+    margin: 0 0 2rem 0 !important;
+    list-style: none !important;
+}
+
+.messagelist li {
+    padding: 1rem !important;
+    margin: 0 0 0.5rem 0 !important;
+    border-radius: 8px !important;
+    color: var(--light-color) !important;
+}
+
+.messagelist li.success {
+    background: linear-gradient(45deg, rgba(0, 200, 83, 0.1), rgba(0, 200, 83, 0.2)) !important;
+    border-left: 4px solid var(--success-color) !important;
+}
+
+.messagelist li.warning {
+    background: linear-gradient(45deg, rgba(255, 214, 0, 0.1), rgba(255, 214, 0, 0.2)) !important;
+    border-left: 4px solid var(--warning-color) !important;
+}
+
+.messagelist li.error {
+    background: linear-gradient(45deg, rgba(255, 23, 68, 0.1), rgba(255, 23, 68, 0.2)) !important;
+    border-left: 4px solid var(--error-color) !important;
+}
+</style>
+{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">
+    <a href="{% url 'admin:index' %}">
+        CEPB Administration
+    </a>
+</h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %} 

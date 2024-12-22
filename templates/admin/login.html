@@ -1,0 +1,269 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<style>
+/* Login Page Styles */
+.login {
+    background: linear-gradient(135deg, var(--darker-color), var(--dark-color)) !important;
+    min-height: 100vh !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 2rem !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+/* Animated Background */
+.login::before {
+    content: '' !important;
+    position: absolute !important;
+    width: 200% !important;
+    height: 200% !important;
+    background: radial-gradient(circle at center, 
+        rgba(76, 175, 80, 0.1) 0%,
+        rgba(33, 150, 243, 0.1) 25%,
+        transparent 50%) !important;
+    animation: rotate 30s linear infinite !important;
+    top: -50% !important;
+    left: -50% !important;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Login Form Container */
+#login-form {
+    background: rgba(255, 255, 255, 0.03) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid var(--glass-border) !important;
+    border-radius: 16px !important;
+    padding: 3rem !important;
+    width: 100% !important;
+    max-width: 400px !important;
+    position: relative !important;
+    z-index: 1 !important;
+    box-shadow: var(--shadow-lg) !important;
+}
+
+/* Form Header */
+#header {
+    background: transparent !important;
+    box-shadow: none !important;
+    text-align: center !important;
+    padding-bottom: 2rem !important;
+}
+
+#branding h1 {
+    font-size: 2rem !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 1rem !important;
+}
+
+#branding h1::before {
+    content: '\f0ac' !important;
+    font-family: 'Font Awesome 6 Free' !important;
+    font-weight: 900 !important;
+    font-size: 2rem !important;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+/* Form Fields */
+.form-row {
+    padding: 0 !important;
+    margin-bottom: 1.5rem !important;
+    border: none !important;
+    position: relative !important;
+}
+
+.form-row label {
+    color: var(--light-color) !important;
+    font-size: 0.9rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    margin-bottom: 0.75rem !important;
+    display: block !important;
+    font-weight: 500 !important;
+}
+
+.form-row input {
+    width: 100% !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid var(--glass-border) !important;
+    border-radius: 8px !important;
+    padding: 1rem !important;
+    color: var(--light-color) !important;
+    transition: var(--transition) !important;
+    font-size: 1rem !important;
+}
+
+.form-row input:focus {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2) !important;
+    outline: none !important;
+}
+
+/* Submit Button */
+.submit-row {
+    margin: 2rem 0 1rem !important;
+}
+
+.submit-row input {
+    width: 100% !important;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)) !important;
+    color: var(--light-color) !important;
+    border: none !important;
+    padding: 1rem !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    cursor: pointer !important;
+    transition: var(--transition) !important;
+    position: relative !important;
+    overflow: hidden !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.5rem !important;
+}
+
+.submit-row input::after {
+    content: '\f054' !important;
+    font-family: 'Font Awesome 6 Free' !important;
+    font-weight: 900 !important;
+}
+
+.submit-row input:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: var(--shadow-md) !important;
+}
+
+/* Error Messages */
+.errornote {
+    background: linear-gradient(45deg, rgba(255, 23, 68, 0.1), rgba(255, 23, 68, 0.2)) !important;
+    border-left: 4px solid var(--error-color) !important;
+    color: var(--light-color) !important;
+    padding: 1rem !important;
+    border-radius: 8px !important;
+    margin-bottom: 1.5rem !important;
+    animation: shake 0.5s ease-in-out !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+}
+
+.errornote::before {
+    content: '\f071' !important;
+    font-family: 'Font Awesome 6 Free' !important;
+    font-weight: 900 !important;
+    color: var(--error-color) !important;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* Password Reset Link */
+.password-reset-link {
+    text-align: center !important;
+    margin-top: 1.5rem !important;
+}
+
+.password-reset-link a {
+    color: var(--light-color) !important;
+    text-decoration: none !important;
+    font-size: 0.9rem !important;
+    opacity: 0.8 !important;
+    transition: var(--transition) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+}
+
+.password-reset-link a::before {
+    content: '\f084' !important;
+    font-family: 'Font Awesome 6 Free' !important;
+    font-weight: 900 !important;
+}
+
+.password-reset-link a:hover {
+    opacity: 1 !important;
+    color: var(--primary-color) !important;
+    transform: translateX(5px) !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .login {
+        padding: 1rem !important;
+    }
+    
+    #login-form {
+        padding: 2rem !important;
+    }
+    
+    #branding h1 {
+        font-size: 1.5rem !important;
+    }
+}
+</style>
+{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">CEPB Administration</h1>
+{% endblock %}
+
+{% block content %}
+<div id="content-main">
+{% if form.errors and not form.non_field_errors %}
+<p class="errornote">
+{% blocktranslate count counter=form.errors.items|length %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktranslate %}
+</p>
+{% endif %}
+
+{% if form.non_field_errors %}
+{% for error in form.non_field_errors %}
+<p class="errornote">
+    {{ error }}
+</p>
+{% endfor %}
+{% endif %}
+
+<div id="content-main">
+<form action="{{ app_path }}" method="post" id="login-form">{% csrf_token %}
+  <div class="form-row">
+    {{ form.username.errors }}
+    {{ form.username.label_tag }} {{ form.username }}
+  </div>
+  <div class="form-row">
+    {{ form.password.errors }}
+    {{ form.password.label_tag }} {{ form.password }}
+    <input type="hidden" name="next" value="{{ next }}">
+  </div>
+  {% url 'admin_password_reset' as password_reset_url %}
+  {% if password_reset_url %}
+  <div class="password-reset-link">
+    <a href="{{ password_reset_url }}">{% translate 'Forgotten your password or username?' %}</a>
+  </div>
+  {% endif %}
+  <div class="submit-row">
+    <input type="submit" value="{% translate 'Log in' %}">
+  </div>
+</form>
+</div>
+</div>
+{% endblock %} 

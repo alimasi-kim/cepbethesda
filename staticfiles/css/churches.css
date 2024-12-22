@@ -1,0 +1,327 @@
+/* Page Header */
+.churches-header {
+    background: linear-gradient(rgba(26, 35, 126, 0.9), rgba(26, 35, 126, 0.9)),
+                url('../images/church-bg.jpg') center/cover;
+    padding: 100px 0;
+    color: white;
+    position: relative;
+}
+
+/* Church Detail Styles */
+.church-details {
+    background: var(--light-bg);
+}
+
+.church-main-image {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow-primary);
+}
+
+.church-main-image img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.church-main-image:hover img {
+    transform: scale(1.05);
+}
+
+.church-info-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow-primary);
+    height: 100%;
+    border: 2px solid var(--accent-color);
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--light-bg);
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+.info-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-gold);
+}
+
+.info-item i {
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    background: white;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0 3px 10px rgba(199, 164, 74, 0.2);
+}
+
+.info-content h4 {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.info-content p {
+    margin-bottom: 0.25rem;
+    color: var(--text-color);
+}
+
+/* Service Times Card */
+.service-times-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow-primary);
+    text-align: center;
+    border: 2px solid var(--accent-color);
+}
+
+.service-times-content {
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+}
+
+/* Activities and Ministries Cards */
+.activities-card,
+.ministries-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    height: 100%;
+    box-shadow: var(--shadow-primary);
+    border: 2px solid var(--accent-color);
+}
+
+.activities-card h3,
+.ministries-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    text-align: center;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--accent-color);
+}
+
+.activities-content,
+.ministries-content {
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* Call to Action Section */
+.cta-section {
+    background: var(--gradient-primary);
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, var(--accent-color) 0%, transparent 100%);
+    opacity: 0.1;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .church-main-image img {
+        height: 300px;
+    }
+    
+    .church-info-card,
+    .service-times-card,
+    .activities-card,
+    .ministries-card {
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+} 
+
+/* Church Cards */
+.church-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow-primary);
+    height: 100%;
+    transition: all 0.4s ease;
+    border: 2px solid transparent;
+}
+
+.church-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--accent-color);
+    box-shadow: var(--shadow-gold);
+}
+
+.church-image {
+    position: relative;
+    height: 250px;
+    overflow: hidden;
+}
+
+.church-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.church-card:hover .church-image img {
+    transform: scale(1.1);
+}
+
+.church-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(10, 20, 66, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.church-card:hover .church-overlay {
+    opacity: 1;
+}
+
+.church-overlay .btn {
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.church-card:hover .church-overlay .btn {
+    transform: translateY(0);
+}
+
+.church-content {
+    padding: 1.5rem;
+}
+
+.church-content h3 {
+    color: var(--primary-color);
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 0.5rem;
+}
+
+.church-info {
+    margin-bottom: 1rem;
+}
+
+.church-info p {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.church-info i {
+    color: var(--accent-color);
+    font-size: 1.1rem;
+    width: 24px;
+    text-align: center;
+}
+
+.church-schedule {
+    background: var(--light-bg);
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.church-schedule h4 {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.church-contact {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding-top: 1rem;
+}
+
+.church-contact p {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.church-contact i {
+    color: var(--accent-color);
+    font-size: 1rem;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.church-card {
+    animation: fadeInUp 0.6s ease backwards;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .church-image {
+        height: 200px;
+    }
+    
+    .church-content {
+        padding: 1.25rem;
+    }
+    
+    .church-content h3 {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .church-card {
+        margin-bottom: 1.5rem;
+    }
+} 

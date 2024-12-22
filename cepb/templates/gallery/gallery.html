@@ -1,0 +1,183 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header bg-primary text-white py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="display-4">Notre Galerie</h1>
+                <div class="title-separator">
+                    <span></span>
+                    <i class="fas fa-images"></i>
+                    <span></span>
+                </div>
+                <p class="lead">Découvrez nos moments forts en images</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Gallery Grid -->
+<section class="gallery-section py-5">
+    <div class="container">
+        <!-- Filter Buttons -->
+        <div class="row mb-4">
+            <div class="col-12 text-center">
+                <div class="gallery-filters">
+                    <button class="btn btn-outline-primary active" data-filter="*">Tout</button>
+                    <button class="btn btn-outline-primary" data-filter=".cultes">Cultes</button>
+                    <button class="btn btn-outline-primary" data-filter=".evenements">Événements</button>
+                    <button class="btn btn-outline-primary" data-filter=".activites">Activités</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gallery Grid -->
+        <div class="row g-4" id="gallery-grid">
+            {% for photo in photos %}
+            <div class="col-md-4 gallery-item">
+                <div class="gallery-card">
+                    <img src="{{ photo.image.url }}" alt="{{ photo.title }}" class="img-fluid">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3>{{ photo.title }}</h3>
+                            <p>{{ photo.description }}</p>
+                            <a href="{{ photo.image.url }}" class="btn btn-light" data-fancybox="gallery">
+                                <i class="fas fa-search-plus"></i> Agrandir
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <p>Aucune photo n'est disponible pour le moment.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.gallery-filters {
+    margin-bottom: 2rem;
+}
+
+.gallery-filters .btn {
+    margin: 0 0.5rem;
+    border-radius: 25px;
+    padding: 0.5rem 1.5rem;
+}
+
+.gallery-card {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.gallery-card:hover {
+    transform: translateY(-5px);
+}
+
+.gallery-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-card:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.gallery-info {
+    text-align: center;
+    color: white;
+    padding: 1rem;
+}
+
+.gallery-info h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.gallery-info p {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.title-separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+.title-separator span {
+    height: 2px;
+    width: 50px;
+    background: white;
+    margin: 0 10px;
+}
+
+.title-separator i {
+    font-size: 1.5rem;
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Fancybox
+    Fancybox.bind("[data-fancybox]", {
+        // Your custom options
+    });
+
+    // Filter functionality
+    const filterButtons = document.querySelectorAll('.gallery-filters .btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Remove active class from all buttons
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            // Add active class to clicked button
+            this.classList.add('active');
+
+            const filterValue = this.getAttribute('data-filter');
+
+            galleryItems.forEach(item => {
+                if (filterValue === '*' || item.classList.contains(filterValue.substring(1))) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    });
+});
+</script>
+{% endblock %} 

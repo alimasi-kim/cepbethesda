@@ -1,0 +1,233 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header bg-primary text-white py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="display-4">À Propos de Nous</h1>
+                <div class="title-separator">
+                    <span></span>
+                    <i class="fas fa-church"></i>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Content -->
+<section class="about-content py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <div class="about-image" data-aos="fade-right">
+                    <img src="{% static 'images/KIM2.jpg' %}" alt="Notre Église" class="img-fluid rounded shadow">
+                </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left">
+                <h2 class="section-title">Présentation de la CEPB</h2>
+                <p class="lead">Sous la direction de l'Évêque ELIE PUNDU</p>
+                <div class="about-text">
+                    <p>La Communauté Évangélique Piscine de Bethesda a été fondée en 2011 à Lubumbashi, en République Démocratique du Congo, par l'Évêque Élie Pundu, un homme de foi appelé par Dieu à établir un refuge spirituel où les âmes peuvent être restaurées et transformées par la puissance de l'Évangile.</p>
+                    
+                    <p>Inspirée par le récit biblique de la Piscine de Bethesda (Jean 5:1-15), la communauté s'est rapidement imposée comme un mouvement spirituel dynamique, touchant des milliers de vies en RDC et au-delà.</p>
+                    
+                    <p>Aujourd'hui, la communauté s'engage à proclamer l'Évangile, à former des disciples engagés, à promouvoir l'unité chrétienne et à répondre aux besoins des plus vulnérables. Avec une vision de croissance internationale, elle travaille à établir des antennes dans d'autres régions et à renforcer son impact dans le monde.</p>
+                </div>
+                
+                <div class="mission-points mt-4">
+                    <div class="mission-item">
+                        <i class="fas fa-check-circle text-primary"></i>
+                        <div class="mission-text">
+                            <h4>Notre Mission</h4>
+                            <p>Apporter la lumière de l'Évangile à travers des actions concrètes qui transforment les vies et impactent les communautés.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mission-item">
+                        <i class="fas fa-check-circle text-primary"></i>
+                        <div class="mission-text">
+                            <h4>Notre Vision</h4>
+                            <p>Devenir une église mondiale reconnue comme un phare de foi, de guérison et de transformation pour les nations.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mission-item">
+                        <i class="fas fa-check-circle text-primary"></i>
+                        <div class="mission-text">
+                            <h4>Nos Valeurs</h4>
+                            <p>L'amour, l'intégrité, l'excellence et le service dans la puissance de l'Évangile.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Leadership Section -->
+<section class="leadership-section py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="section-title">Notre Leadership</h2>
+                <div class="title-separator">
+                    <span></span>
+                    <i class="fas fa-users"></i>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up">
+                <div class="leader-card text-center">
+                    <div class="leader-image">
+                        <img src="{% static 'images/KIM2.jpg' %}" alt="Évêque ELIE PUNDU" class="rounded-circle">
+                    </div>
+                    <div class="leader-info">
+                        <h3>Évêque ELIE PUNDU</h3>
+                        <p class="leader-role">Pasteur Principal</p>
+                        <p class="leader-bio">Guide spirituel de notre communauté depuis sa fondation.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="cta-section py-5 text-white text-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8" data-aos="fade-up">
+                <h2 class="mb-4">Rejoignez Notre Communauté</h2>
+                <p class="lead mb-4">Venez découvrir la parole de Dieu et grandir spirituellement avec nous</p>
+                <div class="cta-buttons">
+                    <a href="{% url 'contact' %}" class="btn btn-light btn-lg me-3">Nous Contacter</a>
+                    <a href="{% url 'events' %}" class="btn btn-outline-light btn-lg">Nos Événements</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Mission Section -->
+<section class="mission-section py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="section-title">Notre Mission</h2>
+                <div class="title-separator">
+                    <span></span>
+                    <i class="fas fa-dove"></i>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-4" data-aos="fade-up">
+                <div class="mission-pillar">
+                    <div class="pillar-icon">
+                        <i class="fas fa-cross"></i>
+                    </div>
+                    <h3>Proclamer l'Évangile</h3>
+                    <p>Conduire les âmes à la repentance et à une vie nouvelle en Christ par des actions d'évangélisation, des prédications puissantes et des enseignements bibliques.</p>
+                    <div class="bible-verse">
+                        <i class="fas fa-book-open"></i>
+                        <p>"Allez dans le monde entier et prêchez la bonne nouvelle à toute la création." - Marc 16:15</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="mission-pillar">
+                    <div class="pillar-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Guérison et Restauration</h3>
+                    <p>Créer un environnement où chacun peut expérimenter la puissance de Dieu pour guérir les corps, les cœurs et les âmes.</p>
+                    <div class="bible-verse">
+                        <i class="fas fa-book-open"></i>
+                        <p>"Il dit au paralytique : Je te le dis, lève-toi, prends ton lit, et rentre chez toi." - Marc 2:11</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="mission-pillar">
+                    <div class="pillar-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Former des Disciples</h3>
+                    <p>Éduquer et équiper les croyants pour qu'ils deviennent des témoins actifs de leur foi.</p>
+                    <div class="bible-verse">
+                        <i class="fas fa-book-open"></i>
+                        <p>"Allez, faites de toutes les nations des disciples..." - Matthieu 28:19-20</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Objectifs Stratégiques -->
+        <div class="row mt-5">
+            <div class="col-12 text-center mb-4">
+                <h3 class="section-subtitle">Nos Actions Concrètes</h3>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3" data-aos="fade-up">
+                <div class="action-card">
+                    <i class="fas fa-bullhorn"></i>
+                    <h4>Intensifier l'évangélisation</h4>
+                    <ul>
+                        <li>Organiser des croisades et séminaires</li>
+                        <li>Utiliser les plateformes numériques</li>
+                        <li>Former des équipes d'évangélisation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                <div class="action-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h4>Former des Leaders</h4>
+                    <ul>
+                        <li>Formations bibliques régulières</li>
+                        <li>Programmes pour les jeunes</li>
+                        <li>Institut biblique</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+                <div class="action-card">
+                    <i class="fas fa-hands-helping"></i>
+                    <h4>Servir la Communauté</h4>
+                    <ul>
+                        <li>Aide humanitaire</li>
+                        <li>Soutien aux démunis</li>
+                        <li>Projets sociaux</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+                <div class="action-card">
+                    <i class="fas fa-globe-africa"></i>
+                    <h4>Impact International</h4>
+                    <ul>
+                        <li>Implantation d'églises</li>
+                        <li>Missions internationales</li>
+                        <li>Partenariats stratégiques</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} 

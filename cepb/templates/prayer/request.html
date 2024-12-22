@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Requêtes de Prière - CEPB{% endblock %}
+
+{% block content %}
+<div class="prayer-page py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="section-header mb-5">
+                    <h1 class="section-title">Requêtes de Prière</h1>
+                    <div class="title-separator">
+                        <span></span>
+                        <i class="fas fa-pray"></i>
+                        <span></span>
+                    </div>
+                    <p class="section-description">
+                        Partagez vos sujets de prière avec notre communauté. Nous prions avec vous.
+                    </p>
+                </div>
+
+                <!-- Liste des requêtes publiques -->
+                <div class="prayer-requests-list">
+                    <h3 class="mb-4">Prions ensemble pour</h3>
+                    {% for prayer in prayer_requests %}
+                    <div class="prayer-request-card">
+                        <div class="prayer-content">
+                            <p>{{ prayer.request }}</p>
+                        </div>
+                        <div class="prayer-meta">
+                            {% if not prayer.is_anonymous %}
+                            <span class="prayer-author">- {{ prayer.name }}</span>
+                            {% endif %}
+                            <span class="prayer-date">{{ prayer.created_at|date:"d M Y" }}</span>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <p class="text-muted">Aucune requête de prière pour le moment.</p>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="prayer-form-card">
+                    <h3>Soumettre une requête</h3>
+                    {% if messages %}
+                    <div class="messages mb-4">
+                        {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">
+                            {{ message }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Votre nom</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="request" class="form-label">Votre requête</label>
+                            <textarea class="form-control" id="request" name="request" rows="5" required></textarea>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="is_anonymous" name="is_anonymous">
+                            <label class="form-check-label" for="is_anonymous">Garder ma requête anonyme</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Soumettre ma requête</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Actualités - CEPB{% endblock %}
+
+{% block content %}
+<div class="news-page">
+    <div class="page-header">
+        <div class="container">
+            <h1 class="page-title">Actualités</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}">Accueil</a></li>
+                    <li class="breadcrumb-item active">Actualités</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    {% if request.user.is_staff %}
+    <div class="admin-actions container mb-4">
+        <a href="{% url 'add_news' %}" class="btn btn-primary">
+            <i class="fas fa-plus me-2"></i>Ajouter une actualité
+        </a>
+    </div>
+    {% endif %}
+
+    <div class="container py-5">
+        <div class="news-grid">
+            {% for news_item in news %}
+            <div class="news-card {% if news_item.is_featured %}featured{% endif %}">
+                <div class="news-image">
+                    <img src="{{ news_item.image.url }}" alt="{{ news_item.title }}">
+                    <div class="news-category">
+                        <span>{{ news_item.get_category_display }}</span>
+                    </div>
+                    <div class="news-date">
+                        <span class="day">{{ news_item.date|date:"d" }}</span>
+                        <span class="month">{{ news_item.date|date:"M"|upper }}</span>
+                        <span class="year">{{ news_item.date|date:"Y" }}</span>
+                    </div>
+                </div>
+                <div class="news-content">
+                    <div class="news-meta">
+                        <span><i class="fas fa-user"></i> {{ news_item.author }}</span>
+                        {% if news_item.location %}
+                        <span><i class="fas fa-map-marker-alt"></i> {{ news_item.location }}</span>
+                        {% endif %}
+                    </div>
+                    <h3>{{ news_item.title }}</h3>
+                    <p>{{ news_item.description|truncatewords:30 }}</p>
+                    <div class="news-footer">
+                        <a href="{% url 'news_detail' news_item.pk %}" class="btn-read-more">
+                            Lire plus <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %} 

@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header bg-primary text-white py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="display-4">Don annulé</h1>
+                <div class="title-separator">
+                    <span></span>
+                    <i class="fas fa-times-circle"></i>
+                    <span></span>
+                </div>
+                <p class="lead">Le processus de don a été interrompu</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Cancel Content -->
+<section class="cancel-section py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <div class="cancel-message bg-white p-5 rounded shadow-sm">
+                    <i class="fas fa-exclamation-circle text-warning mb-4" style="font-size: 4rem;"></i>
+                    <h2 class="mb-4">Votre don n'a pas été finalisé</h2>
+                    <p class="lead mb-4">
+                        Nous comprenons que vous ayez besoin de plus de temps pour réfléchir.
+                        N'hésitez pas à revenir quand vous le souhaitez ou à nous contacter
+                        si vous avez des questions.
+                    </p>
+                    <div class="buttons">
+                        <a href="{% url 'cepb:donation' %}" class="btn btn-primary me-3">
+                            <i class="fas fa-redo me-2"></i>Réessayer
+                        </a>
+                        <a href="{% url 'cepb:contact' %}" class="btn btn-outline-primary">
+                            <i class="fas fa-question-circle me-2"></i>Besoin d'aide ?
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Autres façons de soutenir -->
+                <div class="other-ways mt-5">
+                    <h3 class="mb-4">Autres façons de nous soutenir</h3>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="support-option p-3">
+                                <i class="fas fa-pray text-primary mb-3"></i>
+                                <h5>Prière</h5>
+                                <p>Soutenez-nous par vos prières</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="support-option p-3">
+                                <i class="fas fa-hands-helping text-primary mb-3"></i>
+                                <h5>Bénévolat</h5>
+                                <p>Rejoignez nos équipes</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="support-option p-3">
+                                <i class="fas fa-share-alt text-primary mb-3"></i>
+                                <h5>Partage</h5>
+                                <p>Parlez de notre mission</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.title-separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+.title-separator span {
+    height: 2px;
+    width: 50px;
+    background: white;
+    margin: 0 10px;
+}
+
+.title-separator i {
+    font-size: 1.5rem;
+}
+
+.cancel-message {
+    transition: transform 0.3s ease;
+}
+
+.cancel-message:hover {
+    transform: translateY(-5px);
+}
+
+.buttons .btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 2rem;
+}
+
+.support-option {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    transition: transform 0.3s ease;
+}
+
+.support-option:hover {
+    transform: translateY(-5px);
+}
+
+.support-option i {
+    font-size: 2rem;
+}
+</style>
+{% endblock %} 

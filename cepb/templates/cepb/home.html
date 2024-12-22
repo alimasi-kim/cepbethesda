@@ -1,0 +1,608 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="hero-background" style="background-image: url('{% static "images/KIM2.jpg" %}')">
+        <div class="hero-overlay"></div>
+        <div class="hero-particles" id="particles-js"></div>
+    </div>
+    <div class="container hero-content">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 text-center">
+                <h1 class="hero-title glitch" data-aos="zoom-in" data-text="Communauté Évangélique Piscine de Bethesda">
+                    Communauté Évangélique Piscine de Bethesda
+                </h1>
+                <p class="hero-subtitle glass-card" data-aos="fade-up" data-aos-delay="200">
+                    "Or, à Jérusalem, près de la porte des brebis, il y a une piscine qui s'appelle en hébreu Béthesda, et qui a cinq portiques." - Jean 5:2
+                </p>
+                <div class="hero-buttons" data-aos="fade-up" data-aos-delay="400">
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hero-scroll-down">
+        <a href="#next-service" class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <div class="arrows">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </a>
+    </div>
+</section>
+
+<!-- Prochain Service Section -->
+<section id="next-service" class="next-service-section py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6" data-aos="fade-right">
+                <div class="next-service-info glass-card">
+                    <div class="card-glow"></div>
+                    <h2 class="section-title">Prochain Culte</h2>
+                    {% if next_service %}
+                    <div class="service-time">
+                        <i class="fas fa-calendar pulse-icon"></i>
+                        <span>{{ next_service.day }}</span>
+                    </div>
+                    <div class="service-time">
+                        <i class="fas fa-clock pulse-icon"></i>
+                        <span>{{ next_service.start_time|time:"H:i" }} - {{ next_service.end_time|time:"H:i" }}</span>
+                    </div>
+                    <div class="service-details">
+                        <h4>{{ next_service.title }}</h4>
+                        {% if next_service.description %}
+                        <p>{{ next_service.description }}</p>
+                        {% endif %}
+                    </div>
+                    {% else %}
+                    <div class="service-time">
+                        <i class="fas fa-calendar pulse-icon"></i>
+                        <span>Dimanche</span>
+                    </div>
+                    <div class="service-time">
+                        <i class="fas fa-clock pulse-icon"></i>
+                        <span>09:00 - 12:30</span>
+                    </div>
+                    {% endif %}
+                    <div class="service-location">
+                        <i class="fas fa-map-marker-alt pulse-icon"></i>
+                        <span>{{ church.address }}</span>
+                    </div>
+                    <a href="{% url 'cepb:contact' %}" class="btn btn-neon mt-4">S'y Rendre</a>
+                </div>
+            </div>
+            <div class="col-md-6" data-aos="fade-left">
+                <div class="live-stream-info glass-card">
+                    <div class="card-glow"></div>
+                    <h3>Suivez-nous en Direct</h3>
+                    <p>Rejoignez notre culte en ligne chaque dimanche</p>
+                    <div class="social-links">
+                        <a href="https://www.youtube.com/channel/UC7U3-M0AlVs2U20PByKMpXg" 
+                           class="btn btn-neon-youtube" 
+                           target="_blank">
+                            <i class="fab fa-youtube"></i> Notre Chaîne YouTube
+                        </a>
+                        <a href="#" class="btn btn-neon-facebook">
+                            <i class="fab fa-facebook"></i> Facebook
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Vision Section -->
+<section id="about-section" class="vision-section py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6" data-aos="fade-right">
+                <div class="vision-content glass-card">
+                    <div class="card-glow"></div>
+                    <h2 class="section-title">Notre Vision</h2>
+                    <div class="title-separator">
+                        <span class="line"></span>
+                        <i class="fas fa-cross glow-icon"></i>
+                        <span class="line"></span>
+                    </div>
+                    <p class="lead">Sous la direction de l'Évêque ELIE PUNDU</p>
+                    <div class="vision-points">
+                        <div class="vision-item" data-aos="fade-up" data-aos-delay="100">
+                            <i class="fas fa-check-circle glow-icon"></i>
+                            <span>Prêcher l'Évangile de Jésus-Christ</span>
+                        </div>
+                        <div class="vision-item" data-aos="fade-up" data-aos-delay="200">
+                            <i class="fas fa-check-circle glow-icon"></i>
+                            <span>Former des disciples</span>
+                        </div>
+                        <div class="vision-item" data-aos="fade-up" data-aos-delay="300">
+                            <i class="fas fa-check-circle glow-icon"></i>
+                            <span>Servir la communauté</span>
+                        </div>
+                    </div>
+                    <a href="{% url 'cepb:about' %}" class="btn btn-neon mt-4">En savoir plus</a>
+                </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left">
+                <div class="vision-image">
+                    <div class="image-frame">
+                        <img src="{% static 'images/KIM2.jpg' %}" alt="Évêque ELIE PUNDU" class="img-fluid">
+                        <div class="frame-glow"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats-section py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-6 col-md-3" data-aos="zoom-in">
+                <div class="stat-item glass-card text-center">
+                    <div class="card-glow"></div>
+                    <i class="fas fa-church glow-icon fa-2x"></i>
+                    <h3 class="stat-number" data-count="{{ stats.churches_count }}">0</h3>
+                    <p class="stat-label">Églises</p>
+                </div>
+            </div>
+            <div class="col-6 col-md-3" data-aos="zoom-in" data-aos-delay="100">
+                <div class="stat-item glass-card text-center">
+                    <div class="card-glow"></div>
+                    <i class="fas fa-users glow-icon fa-2x"></i>
+                    <h3 class="stat-number" data-count="{{ stats.members_count }}">0</h3>
+                    <p class="stat-label">Membres</p>
+                </div>
+            </div>
+            <div class="col-6 col-md-3" data-aos="zoom-in" data-aos-delay="200">
+                <div class="stat-item glass-card text-center">
+                    <div class="card-glow"></div>
+                    <i class="fas fa-bible glow-icon fa-2x"></i>
+                    <h3 class="stat-number" data-count="{{ stats.sermons_count }}">0</h3>
+                    <p class="stat-label">Prédications</p>
+                </div>
+            </div>
+            <div class="col-6 col-md-3" data-aos="zoom-in" data-aos-delay="300">
+                <div class="stat-item glass-card text-center">
+                    <div class="card-glow"></div>
+                    <i class="fas fa-hands-helping glow-icon fa-2x"></i>
+                    <h3 class="stat-number" data-count="{{ stats.activities_count }}">0</h3>
+                    <p class="stat-label">Activités</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action Section -->
+<section class="cta-section py-5 text-white text-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8" data-aos="fade-up">
+                <div class="glass-card">
+                    <div class="card-glow"></div>
+                    <h2 class="mb-4">Rejoignez notre communauté</h2>
+                    <p class="lead mb-4">Venez découvrir la parole de Dieu et grandir spirituellement avec nous</p>
+                    <div class="cta-buttons">
+                        <a href="#next-service" class="btn btn-neon btn-lg me-3">Assister à un culte</a>
+                        <a href="{% url 'cepb:contact' %}" class="btn btn-outline-neon btn-lg">Nous contacter</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+{{ block.super }}
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+// Particles.js Configuration
+particlesJS('particles-js', {
+    particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: '#ffffff' },
+        shape: { type: 'circle' },
+        opacity: { value: 0.5, random: false },
+        size: { value: 3, random: true },
+        line_linked: {
+            enable: true,
+            distance: 150,
+            color: '#ffffff',
+            opacity: 0.4,
+            width: 1
+        },
+        move: {
+            enable: true,
+            speed: 2,
+            direction: 'none',
+            random: false,
+            straight: false,
+            out_mode: 'out',
+            bounce: false
+        }
+    },
+    interactivity: {
+        detect_on: 'canvas',
+        events: {
+            onhover: { enable: true, mode: 'repulse' },
+            onclick: { enable: true, mode: 'push' },
+            resize: true
+        }
+    },
+    retina_detect: true
+});
+
+// Animation des statistiques avec compteur fluide
+function animateStats() {
+    const stats = document.querySelectorAll('.stat-number');
+    stats.forEach(stat => {
+        const target = parseInt(stat.getAttribute('data-count'));
+        let current = 0;
+        const increment = target / 50;
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                clearInterval(timer);
+                current = target;
+            }
+            stat.textContent = Math.round(current);
+        }, 20);
+    });
+}
+
+// Observer pour les statistiques
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            animateStats();
+            observer.unobserve(entry.target);
+        }
+    });
+});
+
+document.querySelectorAll('.stats-section').forEach(section => {
+    observer.observe(section);
+});
+
+// Effet de parallaxe amélioré
+window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const heroBackground = document.querySelector('.hero-background');
+    const heroContent = document.querySelector('.hero-content');
+    
+    if (heroBackground) {
+        heroBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
+        heroContent.style.transform = `translateY(${scrolled * 0.2}px)`;
+        heroContent.style.opacity = 1 - (scrolled * 0.003);
+    }
+});
+
+// Effet de glitch pour le titre
+document.querySelector('.glitch').addEventListener('mouseover', function() {
+    this.classList.add('glitch-active');
+    setTimeout(() => this.classList.remove('glitch-active'), 1000);
+});
+</script>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+/* Professional Color Palette */
+:root {
+    /* Primary Colors */
+    --primary-dark: #0d1b3e;
+    --primary-main: #1a237e;
+    --primary-light: #534bae;
+    
+    /* Secondary Colors */
+    --secondary-dark: #1565c0;
+    --secondary-main: #2196f3;
+    --secondary-light: #64b5f6;
+    
+    /* Accent Colors */
+    --accent-dark: #ffc107;
+    --accent-main: #ffd700;
+    --accent-light: #ffe57f;
+    
+    /* Text Colors */
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.87);
+    --text-disabled: rgba(255, 255, 255, 0.6);
+    --text-dark: #1a1a1a;
+    
+    /* Background Colors */
+    --bg-dark: #121212;
+    --bg-main: #1a1a1a;
+    --bg-light: #242424;
+    --bg-overlay: rgba(18, 18, 18, 0.8);
+    
+    /* UI Elements */
+    --glass-bg: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --divider: rgba(255, 255, 255, 0.12);
+    
+    /* Effects */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.16);
+    --glow-primary: 0 0 20px rgba(26, 35, 126, 0.4);
+    --glow-accent: 0 0 20px rgba(255, 215, 0, 0.3);
+    
+    /* Transitions */
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Typography System */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background-color: var(--bg-main);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+.hero-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-subtitle {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: 400;
+    color: var(--text-secondary);
+    max-width: 800px;
+    margin: 1.5rem auto 2.5rem;
+}
+
+.section-title {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -0.5rem;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: var(--accent-main);
+    border-radius: 2px;
+    transition: var(--transition-normal);
+}
+
+.section-title:hover::after {
+    width: 100px;
+    background: var(--accent-light);
+}
+
+/* Enhanced Glass Card */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition-normal);
+    box-shadow: var(--shadow-md);
+}
+
+.glass-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg), var(--glow-primary);
+    border-color: var(--primary-light);
+}
+
+/* Professional Buttons */
+.btn-primary {
+    background: var(--primary-main);
+    color: var(--text-primary);
+    border: none;
+    border-radius: 12px;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: var(--transition-normal);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+    background: var(--primary-light);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--text-primary);
+    border: 2px solid var(--primary-light);
+    border-radius: 12px;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: var(--transition-normal);
+}
+
+.btn-outline:hover {
+    background: var(--primary-light);
+    color: var(--text-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Stats Section Enhancement */
+.stat-item {
+    padding: 2rem;
+    background: var(--glass-bg);
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+    transition: var(--transition-normal);
+}
+
+.stat-number {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--accent-main);
+    margin: 1rem 0;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+}
+
+.stat-label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Service Section Refinements */
+.service-time {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    border-left: 3px solid var(--accent-main);
+}
+
+.service-time i {
+    font-size: 1.25rem;
+    color: var(--primary-main);
+    margin-right: 1rem;
+}
+
+.service-time span {
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+.service-details {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    border-left: 3px solid var(--accent-main);
+    color: var(--text-dark);
+}
+
+.service-details h4 {
+    color: var(--primary-main);
+    font-weight: 700;
+}
+
+.live-stream-info {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.live-stream-info h3 {
+    color: var(--primary-main);
+    font-weight: 700;
+}
+
+.live-stream-info p {
+    color: var(--text-dark);
+    font-weight: 500;
+}
+
+.next-service-info h2.section-title {
+    color: var(--primary-main);
+}
+
+/* Vision Section Improvements */
+.vision-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    transition: var(--transition-normal);
+}
+
+.vision-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateX(10px);
+    box-shadow: var(--shadow-sm);
+}
+
+.vision-item i {
+    font-size: 1.5rem;
+    color: var(--accent-main);
+    margin-right: 1rem;
+}
+
+.vision-item span {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* Responsive Refinements */
+@media (max-width: 992px) {
+    .glass-card {
+        padding: 2rem;
+    }
+    
+    .vision-item {
+        padding: 0.75rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .glass-card {
+        padding: 1.5rem;
+    }
+    
+    .stat-number {
+        font-size: 2.5rem;
+    }
+    
+    .vision-item span {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .btn-primary,
+    .btn-outline {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .service-time,
+    .service-details {
+        padding: 1rem;
+    }
+}
+</style>
+{% endblock %}

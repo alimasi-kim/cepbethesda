@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Activités - CEPB{% endblock %}
+
+{% block content %}
+<section class="activities-page py-5">
+    <div class="container">
+        <div class="section-header text-center mb-5">
+            <h1 class="section-title">Nos Activités</h1>
+            <div class="title-separator">
+                <span></span>
+                <i class="fas fa-calendar-alt"></i>
+                <span></span>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            {% for activity in activities %}
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{% widthratio forloop.counter 1 100 %}">
+                <div class="activity-card">
+                    {% if activity.image %}
+                    <div class="activity-image">
+                        <img src="{{ activity.image.url }}" alt="{{ activity.title }}">
+                    </div>
+                    {% endif %}
+                    <div class="activity-content">
+                        <h3>{{ activity.title }}</h3>
+                        <p>{{ activity.description|truncatewords:30 }}</p>
+                        <div class="activity-schedule">
+                            <span><i class="fas fa-clock"></i> {{ activity.schedule }}</span>
+                            {% if activity.location %}
+                            <span><i class="fas fa-map-marker-alt"></i> {{ activity.location }}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <p>Aucune activité n'est disponible pour le moment.</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% if activities.has_other_pages %}
+        <nav class="mt-5">
+            <ul class="pagination justify-content-center">
+                {% if activities.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ activities.previous_page_number }}">Précédent</a>
+                </li>
+                {% endif %}
+
+                {% for num in activities.paginator.page_range %}
+                <li class="page-item {% if activities.number == num %}active{% endif %}">
+                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                </li>
+                {% endfor %}
+
+                {% if activities.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ activities.next_page_number }}">Suivant</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+    </div>
+</section>
+{% endblock %} 

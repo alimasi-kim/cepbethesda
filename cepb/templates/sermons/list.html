@@ -1,0 +1,273 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header bg-primary text-white py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="display-4">Nos Sermons</h1>
+                <div class="title-separator">
+                    <span></span>
+                    <i class="fas fa-bible"></i>
+                    <span></span>
+                </div>
+                <p class="lead">Écoutez et téléchargez nos messages</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Sermons Grid -->
+<section class="sermons-grid py-5">
+    <div class="container">
+        <!-- Filtres -->
+        <div class="row mb-4">
+            <div class="col-md-8 offset-md-2">
+                <div class="filters">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" id="sermonSearch" placeholder="Rechercher un sermon...">
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-select" id="categoryFilter">
+                                <option value="">Toutes les catégories</option>
+                                {% for category in categories %}
+                                <option value="{{ category.id }}">{{ category.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-select" id="preacherFilter">
+                                <option value="">Tous les prédicateurs</option>
+                                {% for preacher in preachers %}
+                                <option value="{{ preacher.id }}">{{ preacher.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Liste des sermons -->
+        <div class="row g-4">
+            {% for sermon in sermons %}
+            <div class="col-md-6 col-lg-4 sermon-item" data-aos="fade-up" data-aos-delay="{{ forloop.counter|multiply:100 }}">
+                <div class="sermon-card h-100">
+                    <div class="sermon-image">
+                        <img src="{{ sermon.image.url }}" alt="{{ sermon.title }}" class="img-fluid">
+                        <div class="sermon-overlay">
+                            <a href="{% url 'cepb:sermon_detail' sermon.pk %}" class="btn btn-light">Voir détails</a>
+                        </div>
+                    </div>
+                    <div class="sermon-content p-4">
+                        <div class="sermon-meta mb-2">
+                            <span class="category">
+                                <i class="fas fa-folder text-primary"></i>
+                                {{ sermon.category }}
+                            </span>
+                            <span class="date">
+                                <i class="fas fa-calendar text-primary"></i>
+                                {{ sermon.date|date:"d/m/Y" }}
+                            </span>
+                        </div>
+                        <h3 class="sermon-title">{{ sermon.title }}</h3>
+                        <p class="preacher">
+                            <i class="fas fa-user text-primary"></i>
+                            {{ sermon.preacher }}
+                        </p>
+                        <div class="sermon-description">
+                            <p>{{ sermon.description|truncatewords:30 }}</p>
+                        </div>
+                        <div class="sermon-actions mt-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="{% url 'cepb:sermon_detail' sermon.pk %}" class="btn btn-primary">
+                                    Lire plus
+                                </a>
+                                <div class="sermon-buttons">
+                                    {% if sermon.audio_file %}
+                                    <a href="{{ sermon.audio_file.url }}" class="btn btn-outline-primary" download>
+                                        <i class="fas fa-download"></i>
+                                    </a>
+                                    {% endif %}
+                                    {% if sermon.video_url %}
+                                    <a href="{{ sermon.video_url }}" class="btn btn-outline-primary" target="_blank">
+                                        <i class="fas fa-video"></i>
+                                    </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <p>Aucun sermon n'est disponible pour le moment.</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+        {% if is_paginated %}
+        <div class="row mt-5">
+            <div class="col-12">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        {% endif %}
+
+                        {% for num in page_obj.paginator.page_range %}
+                        <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                        </li>
+                        {% endfor %}
+
+                        {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.sermon-card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    background: white;
+}
+
+.sermon-card:hover {
+    transform: translateY(-5px);
+}
+
+.sermon-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px 10px 0 0;
+}
+
+.sermon-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.sermon-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sermon-card:hover .sermon-overlay {
+    opacity: 1;
+}
+
+.sermon-meta {
+    font-size: 0.9rem;
+}
+
+.sermon-meta span {
+    margin-right: 15px;
+}
+
+.sermon-meta i {
+    margin-right: 5px;
+}
+
+.sermon-title {
+    font-size: 1.25rem;
+    margin: 10px 0;
+}
+
+.preacher {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.preacher i {
+    margin-right: 5px;
+}
+
+.sermon-description {
+    margin: 15px 0;
+    color: #666;
+}
+
+.sermon-buttons .btn {
+    margin-left: 5px;
+}
+
+.filters {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const sermonSearch = document.getElementById('sermonSearch');
+    const categoryFilter = document.getElementById('categoryFilter');
+    const preacherFilter = document.getElementById('preacherFilter');
+    const sermons = document.querySelectorAll('.sermon-item');
+
+    function filterSermons() {
+        const searchTerm = sermonSearch.value.toLowerCase();
+        const category = categoryFilter.value;
+        const preacher = preacherFilter.value;
+
+        sermons.forEach(sermon => {
+            const title = sermon.querySelector('.sermon-title').textContent.toLowerCase();
+            const sermonCategory = sermon.querySelector('.category').textContent.toLowerCase();
+            const sermonPreacher = sermon.querySelector('.preacher').textContent.toLowerCase();
+
+            const matchesSearch = title.includes(searchTerm);
+            const matchesCategory = !category || sermonCategory.includes(category);
+            const matchesPreacher = !preacher || sermonPreacher.includes(preacher);
+
+            if (matchesSearch && matchesCategory && matchesPreacher) {
+                sermon.style.display = 'block';
+            } else {
+                sermon.style.display = 'none';
+            }
+        });
+    }
+
+    sermonSearch.addEventListener('input', filterSermons);
+    categoryFilter.addEventListener('change', filterSermons);
+    preacherFilter.addEventListener('change', filterSermons);
+});
+</script>
+{% endblock %} 

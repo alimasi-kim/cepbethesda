@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ news.title }} - CEPB{% endblock %}
+
+{% block content %}
+<div class="news-detail-page">
+    <div class="page-header">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}">Accueil</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'news_list' %}">Actualités</a></li>
+                    <li class="breadcrumb-item active">{{ news.title }}</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="container py-5">
+        <div class="news-detail-content">
+            <div class="news-header">
+                <div class="news-meta">
+                    <span class="category"><i class="fas fa-tag"></i> {{ news.get_category_display }}</span>
+                    <span class="date"><i class="fas fa-calendar"></i> {{ news.date|date:"d F Y" }}</span>
+                    <span class="author"><i class="fas fa-user"></i> {{ news.author }}</span>
+                    {% if news.location %}
+                    <span class="location"><i class="fas fa-map-marker-alt"></i> {{ news.location }}</span>
+                    {% endif %}
+                    {% if news.time %}
+                    <span class="time"><i class="fas fa-clock"></i> {{ news.time }}</span>
+                    {% endif %}
+                </div>
+                <h1 class="news-title">{{ news.title }}</h1>
+            </div>
+
+            <div class="news-image">
+                <img src="{{ news.image.url }}" alt="{{ news.title }}" class="img-fluid">
+            </div>
+
+            <div class="news-body">
+                {{ news.description|linebreaks }}
+            </div>
+
+            <div class="news-footer">
+                <div class="share-buttons">
+                    <span>Partager :</span>
+                    <a href="#" class="share-btn facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="share-btn twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

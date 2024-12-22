@@ -1,0 +1,371 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Event Header -->
+<section class="event-header position-relative">
+    <div class="event-cover" style="background-image: url('{{ event.image.url }}');">
+        <div class="overlay"></div>
+        <div class="container position-relative">
+            <div class="row min-vh-50 align-items-end pb-5">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'cepb:home' %}" class="text-white">Accueil</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'cepb:event_list' %}" class="text-white">Événements</a></li>
+                            <li class="breadcrumb-item active text-white" aria-current="page">{{ event.title }}</li>
+                        </ol>
+                    </nav>
+                    <h1 class="text-white display-4">{{ event.title }}</h1>
+                    <div class="event-meta text-white mt-3">
+                        <span class="me-4">
+                            <i class="fas fa-calendar"></i>
+                            {{ event.start_date|date:"d/m/Y" }}
+                        </span>
+                        <span class="me-4">
+                            <i class="fas fa-clock"></i>
+                            {{ event.start_time }}
+                        </span>
+                        <span class="me-4">
+                            <i class="fas fa-map-marker-alt"></i>
+                            {{ event.location }}
+                        </span>
+                        <span>
+                            <i class="fas fa-tag"></i>
+                            {{ event.category }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Event Content -->
+<section class="event-content py-5">
+    <div class="container">
+        <div class="row">
+            <!-- Main Content -->
+            <div class="col-lg-8">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <!-- Description -->
+                        <div class="event-description">
+                            <h3>À propos de l'événement</h3>
+                            {{ event.description|linebreaks }}
+                        </div>
+
+                        <!-- Programme -->
+                        {% if event.schedule %}
+                        <div class="event-schedule mt-4">
+                            <h3>Programme</h3>
+                            <div class="schedule-timeline">
+                                {{ event.schedule|linebreaks }}
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <!-- Intervenants -->
+                        {% if event.speakers.exists %}
+                        <div class="event-speakers mt-4">
+                            <h3>Intervenants</h3>
+                            <div class="row g-4">
+                                {% for speaker in event.speakers.all %}
+                                <div class="col-md-6">
+                                    <div class="speaker-card">
+                                        <div class="d-flex align-items-center">
+                                            <img src="{{ speaker.image.url }}" alt="{{ speaker.name }}" class="rounded-circle" style="width: 80px; height: 80px; object-fit: cover;">
+                                            <div class="ms-3">
+                                                <h4 class="mb-1">{{ speaker.name }}</h4>
+                                                <p class="text-muted mb-2">{{ speaker.title }}</p>
+                                                <div class="speaker-social">
+                                                    {% if speaker.facebook %}
+                                                    <a href="{{ speaker.facebook }}" class="me-2" target="_blank">
+                                                        <i class="fab fa-facebook-f"></i>
+                                                    </a>
+                                                    {% endif %}
+                                                    {% if speaker.twitter %}
+                                                    <a href="{{ speaker.twitter }}" class="me-2" target="_blank">
+                                                        <i class="fab fa-twitter"></i>
+                                                    </a>
+                                                    {% endif %}
+                                                    {% if speaker.linkedin %}
+                                                    <a href="{{ speaker.linkedin }}" target="_blank">
+                                                        <i class="fab fa-linkedin-in"></i>
+                                                    </a>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <!-- Galerie -->
+                        {% if event.images.exists %}
+                        <div class="event-gallery mt-4">
+                            <h3>Galerie photos</h3>
+                            <div class="row g-3">
+                                {% for image in event.images.all %}
+                                <div class="col-md-4">
+                                    <a href="{{ image.image.url }}" class="gallery-item" data-fslightbox="gallery">
+                                        <img src="{{ image.image.url }}" alt="Image de l'événement" class="img-fluid rounded">
+                                    </a>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Social Share -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h3>Partager cet événement</h3>
+                        <div class="social-share mt-3">
+                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" class="btn btn-facebook me-2" target="_blank">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ event.title }}" class="btn btn-twitter me-2" target="_blank">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="https://wa.me/?text={{ event.title }}%20{{ request.build_absolute_uri }}" class="btn btn-whatsapp me-2" target="_blank">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                            <a href="mailto:?subject={{ event.title }}&body={{ request.build_absolute_uri }}" class="btn btn-email">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Event Info -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h3>Informations pratiques</h3>
+                        <ul class="list-unstyled event-info">
+                            <li class="mb-3">
+                                <i class="fas fa-calendar-alt text-primary"></i>
+                                <strong>Date:</strong>
+                                {{ event.start_date|date:"d/m/Y" }}
+                            </li>
+                            <li class="mb-3">
+                                <i class="fas fa-clock text-primary"></i>
+                                <strong>Heure:</strong>
+                                {{ event.start_time }}
+                            </li>
+                            <li class="mb-3">
+                                <i class="fas fa-map-marker-alt text-primary"></i>
+                                <strong>Lieu:</strong>
+                                {{ event.location }}
+                            </li>
+                            <li class="mb-3">
+                                <i class="fas fa-users text-primary"></i>
+                                <strong>Places disponibles:</strong>
+                                {{ event.available_seats }}
+                            </li>
+                            <li>
+                                <i class="fas fa-ticket-alt text-primary"></i>
+                                <strong>Prix:</strong>
+                                {% if event.is_free %}
+                                <span class="badge bg-success">Gratuit</span>
+                                {% else %}
+                                <span class="badge bg-primary">{{ event.price }} €</span>
+                                {% endif %}
+                            </li>
+                        </ul>
+                        {% if event.registration_required %}
+                        <div class="mt-4">
+                            <a href="{% url 'cepb:event_register' event.pk %}" class="btn btn-primary w-100">
+                                S'inscrire
+                            </a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Map -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h3>Localisation</h3>
+                        <div id="map" style="height: 300px;"></div>
+                    </div>
+                </div>
+
+                <!-- Related Events -->
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h3>Événements similaires</h3>
+                        <div class="related-events">
+                            {% for related in related_events %}
+                            <div class="related-event-item mb-3">
+                                <a href="{% url 'cepb:event_detail' related.pk %}" class="text-decoration-none">
+                                    <div class="d-flex align-items-center">
+                                        <img src="{{ related.image.url }}" alt="{{ related.title }}" class="rounded" style="width: 80px; height: 60px; object-fit: cover;">
+                                        <div class="ms-3">
+                                            <h5 class="mb-1">{{ related.title }}</h5>
+                                            <small class="text-muted">{{ related.start_date|date:"d/m/Y" }}</small>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.event-cover {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    min-height: 50vh;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.6);
+}
+
+.event-meta i {
+    margin-right: 8px;
+}
+
+.schedule-timeline {
+    border-left: 3px solid var(--bs-primary);
+    padding-left: 20px;
+    margin-left: 10px;
+}
+
+.speaker-card {
+    padding: 15px;
+    border-radius: 10px;
+    background: #f8f9fa;
+    transition: transform 0.3s ease;
+}
+
+.speaker-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.speaker-social a {
+    color: #666;
+    transition: color 0.3s ease;
+}
+
+.speaker-social a:hover {
+    color: var(--bs-primary);
+}
+
+.gallery-item {
+    display: block;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.gallery-item img {
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+.social-share .btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.btn-facebook {
+    background-color: #3b5998;
+    color: white;
+}
+
+.btn-twitter {
+    background-color: #1da1f2;
+    color: white;
+}
+
+.btn-whatsapp {
+    background-color: #25d366;
+    color: white;
+}
+
+.btn-email {
+    background-color: #ea4335;
+    color: white;
+}
+
+.social-share .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.event-info li {
+    display: flex;
+    align-items: center;
+}
+
+.event-info li i {
+    width: 25px;
+    margin-right: 10px;
+}
+
+.related-event-item {
+    transition: transform 0.3s ease;
+}
+
+.related-event-item:hover {
+    transform: translateX(5px);
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    color: white;
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://unpkg.com/fslightbox"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY"></script>
+<script>
+// Initialize Google Maps
+function initMap() {
+    const eventLocation = { lat: {{ event.latitude }}, lng: {{ event.longitude }} };
+    const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 15,
+        center: eventLocation,
+    });
+    const marker = new google.maps.Marker({
+        position: eventLocation,
+        map: map,
+        title: "{{ event.title }}"
+    });
+}
+
+window.addEventListener('load', initMap);
+</script>
+{% endblock %} 

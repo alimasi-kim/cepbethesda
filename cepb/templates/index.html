@@ -1,0 +1,452 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Hero Section Améliorée -->
+<section class="hero-section">
+    <div class="hero-background" style="background-image: url('{% static "images/KIM2.jpg" %}')">
+        <div class="hero-overlay"></div>
+    </div>
+    <div class="container hero-content">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 text-center">
+                <h1 class="hero-title" data-aos="fade-up">
+                    Communauté Évangélique Piscine de Bethesda
+                </h1>
+                <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="100">
+                    "Car là où deux ou trois sont assemblés en mon nom, je suis au milieu d'eux." - Matthieu 18:20
+                </p>
+                <div class="hero-buttons" data-aos="fade-up" data-aos-delay="200">
+                    <a href="#next-service" class="btn btn-primary btn-lg">Prochain Culte</a>
+                    <a href="#about-section" class="btn btn-outline-light btn-lg">Découvrir</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hero-scroll-down">
+        <a href="#next-service">
+            <i class="fas fa-chevron-down"></i>
+        </a>
+    </div>
+</section>
+
+<!-- Prochain Service Section -->
+<section id="next-service" class="next-service-section py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6" data-aos="fade-right">
+                <div class="next-service-info">
+                    <h2>Prochain Culte</h2>
+                    <div class="service-time">
+                        <i class="fas fa-calendar"></i>
+                        <span>Dimanche</span>
+                    </div>
+                    <div class="service-time">
+                        <i class="fas fa-clock"></i>
+                        <span>10:00 - 12:30</span>
+                    </div>
+                    <div class="service-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>{{ church.address }}</span>
+                    </div>
+                    <a href="#" class="btn btn-primary mt-4">S'y Rendre</a>
+                </div>
+            </div>
+            <div class="col-md-6" data-aos="fade-left">
+                <div class="live-stream-info">
+                    <h3>Suivez-nous en Direct</h3>
+                    <p>Rejoignez notre culte en ligne chaque dimanche</p>
+                    <div class="social-links">
+                        <a href="https://www.youtube.com/channel/UC7U3-M0AlVs2U20PByKMpXg" 
+                           class="btn btn-outline-primary" 
+                           target="_blank">
+                            <i class="fab fa-youtube"></i> Notre Chaîne YouTube
+                        </a>
+                        <a href="#" class="btn btn-outline-primary">
+                            <i class="fab fa-facebook"></i> Facebook
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Vision Section -->
+<section id="about-section" class="vision-section py-5 bg-light">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6" data-aos="fade-right">
+                <div class="vision-content">
+                    <h2 class="section-title">Notre Vision</h2>
+                    <div class="title-separator">
+                        <span></span>
+                        <i class="fas fa-cross"></i>
+                        <span></span>
+                    </div>
+                    <p class="lead">Sous la direction de l'Évêque ELIE PUNDU</p>
+                    <div class="vision-points">
+                        <div class="vision-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Prêcher l'Évangile de Jésus-Christ</span>
+                        </div>
+                        <div class="vision-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Former des disciples</span>
+                        </div>
+                        <div class="vision-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Servir la communauté</span>
+                        </div>
+                    </div>
+                    <a href="{% url 'about' %}" class="btn btn-primary mt-4">En savoir plus</a>
+                </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left">
+                <div class="vision-image">
+                    <img src="{% static 'images/KIM2.jpg' %}" alt="Évêque ELIE PUNDU" class="img-fluid rounded">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats-section py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-6 col-md-3" data-aos="fade-up">
+                <div class="stat-item text-center">
+                    <i class="fas fa-church fa-2x"></i>
+                    <h3 class="stat-number" data-count="{{ stats.churches_count }}">0</h3>
+                    <p class="stat-label">Églises</p>
+                </div>
+            </div>
+            <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="100">
+                <div class="stat-item text-center">
+                    <i class="fas fa-users fa-2x"></i>
+                    <h3 class="stat-number" data-count="{{ stats.members_count }}">0</h3>
+                    <p class="stat-label">Membres</p>
+                </div>
+            </div>
+            <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="200">
+                <div class="stat-item text-center">
+                    <i class="fas fa-bible fa-2x"></i>
+                    <h3 class="stat-number" data-count="{{ stats.sermons_count }}">0</h3>
+                    <p class="stat-label">Prédications</p>
+                </div>
+            </div>
+            <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="300">
+                <div class="stat-item text-center">
+                    <i class="fas fa-hands-helping fa-2x"></i>
+                    <h3 class="stat-number" data-count="{{ stats.activities_count }}">0</h3>
+                    <p class="stat-label">Activités</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Latest Sermons Section -->
+<section class="sermons-section py-5">
+    <div class="container">
+        <div class="section-header text-center mb-5" data-aos="fade-up">
+            <h2 class="section-title">Dernières Prédications</h2>
+            <div class="title-separator">
+                <span></span>
+                <i class="fas fa-bible"></i>
+                <span></span>
+            </div>
+        </div>
+        <div class="row g-4">
+            {% for sermon in latest_sermons %}
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="{% widthratio forloop.counter 1 100 %}">
+                <div class="sermon-card">
+                    <div class="sermon-header">
+                        <span class="date">{{ sermon.date|date:"d M Y" }}</span>
+                        <span class="preacher">{{ sermon.preacher }}</span>
+                    </div>
+                    <div class="sermon-content">
+                        <h3>{{ sermon.title }}</h3>
+                        <p class="scripture">{{ sermon.scripture_reference }}</p>
+                        <div class="sermon-actions">
+                            {% if sermon.video_url %}
+                            <a href="{{ sermon.video_url }}" class="btn btn-sm btn-outline-primary">
+                                <i class="fas fa-video"></i> Regarder
+                            </a>
+                            {% endif %}
+                            {% if sermon.audio_file %}
+                            <a href="{{ sermon.audio_file.url }}" class="btn btn-sm btn-outline-primary">
+                                <i class="fas fa-headphones"></i> Écouter
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-4">
+            <a href="{% url 'sermons' %}" class="btn btn-primary">Toutes les prédications</a>
+        </div>
+    </div>
+</section>
+
+<!-- Events Calendar Section -->
+<section class="events-section py-5 bg-light">
+    <div class="container">
+        <div class="section-header text-center mb-5" data-aos="fade-up">
+            <h2 class="section-title">Événements à Venir</h2>
+            <div class="title-separator">
+                <span></span>
+                <i class="fas fa-calendar-alt"></i>
+                <span></span>
+            </div>
+        </div>
+        <div class="row g-4">
+            {% for event in upcoming_events|slice:":3" %}
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="{% widthratio forloop.counter 1 100 %}">
+                <div class="event-card">
+                    {% if event.image %}
+                    <div class="event-image">
+                        <img src="{{ event.image.url }}" alt="{{ event.title }}">
+                    </div>
+                    {% endif %}
+                    <div class="event-content">
+                        <div class="event-date">
+                            <span class="day">{{ event.date|date:"d" }}</span>
+                            <span class="month">{{ event.date|date:"M" }}</span>
+                        </div>
+                        <h3>{{ event.title }}</h3>
+                        <p>{{ event.description|truncatewords:20 }}</p>
+                        <div class="event-details">
+                            <span><i class="fas fa-clock"></i> {{ event.time }}</span>
+                            <span><i class="fas fa-map-marker-alt"></i> {{ event.location }}</span>
+                        </div>
+                        <a href="{% url 'event_detail' event.id %}" class="btn btn-outline-primary mt-3">En savoir plus</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-4">
+            <a href="{% url 'events' %}" class="btn btn-primary">Tous les événements</a>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials-section py-5">
+    <div class="container">
+        <div class="section-header text-center mb-5" data-aos="fade-up">
+            <h2 class="section-title">Témoignages</h2>
+            <div class="title-separator">
+                <span></span>
+                <i class="fas fa-quote-right"></i>
+                <span></span>
+            </div>
+        </div>
+        <div class="swiper testimonials-slider" data-aos="fade-up">
+            <div class="swiper-wrapper">
+                {% for testimonial in testimonials %}
+                <div class="swiper-slide">
+                    <div class="testimonial-item">
+                        <div class="testimonial-content">
+                            <div class="testimonial-text">
+                                <i class="fas fa-quote-left"></i>
+                                <p>{{ testimonial.content }}</p>
+                            </div>
+                            <div class="testimonial-author">
+                                {% if testimonial.author_image %}
+                                <img src="{{ testimonial.author_image.url }}" alt="{{ testimonial.author_name }}">
+                                {% endif %}
+                                <div class="author-info">
+                                    <h4>{{ testimonial.author_name }}</h4>
+                                    <p>{{ testimonial.author_role }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action Section -->
+<section class="cta-section py-5 text-white text-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8" data-aos="fade-up">
+                <h2 class="mb-4">Rejoignez notre communauté</h2>
+                <p class="lead mb-4">Venez découvrir la parole de Dieu et grandir spirituellement avec nous</p>
+                <div class="cta-buttons">
+                    <a href="#next-service" class="btn btn-light btn-lg me-3">Assister à un culte</a>
+                    <a href="{% url 'contact' %}" class="btn btn-outline-light btn-lg">Nous contacter</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Service Times Section -->
+<section class="service-times py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="section-title">Horaires de Culte</h2>
+                <div class="title-separator">
+                    <span></span>
+                    <i class="fas fa-clock"></i>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-4" data-aos="fade-up">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <h3>Culte du Dimanche</h3>
+                    <div class="service-time-block">
+                        <div class="service-time">09h00 - 12h30</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-pray"></i>
+                    </div>
+                    <h3>Prière d'Intercession</h3>
+                    <p>Mardi et Jeudi</p>
+                    <div class="service-time">09h00 - 18h00</div>
+                </div>
+            </div>
+            
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-book-reader"></i>
+                    </div>
+                    <h3>Étude Biblique</h3>
+                    <p>Mercredi et Vendredi</p>
+                    <div class="service-time">16h00 - 18h30</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- YouTube Section -->
+<section class="youtube-section py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="section-title">Nos Dernières Vidéos</h2>
+                <div class="title-separator">
+                    <span></span>
+                    <i class="fab fa-youtube"></i>
+                    <span></span>
+                </div>
+                <p class="lead">Suivez-nous sur notre chaîne YouTube</p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-8">
+                <!-- Dernière vidéo en vedette -->
+                <div class="featured-video" data-aos="fade-up">
+                    <div class="video-wrapper">
+                        <iframe 
+                            width="100%" 
+                            height="450" 
+                            src="https://www.youtube.com/embed/videoseries?list=UC7U3-M0AlVs2U20PByKMpXg" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="youtube-info" data-aos="fade-left">
+                    <div class="youtube-stats">
+                        <div class="youtube-stat">
+                            <i class="fas fa-users"></i>
+                            <span class="stat-label">Abonnés</span>
+                            <div class="stat-value" id="subscriber-count">...</div>
+                        </div>
+                        <div class="youtube-stat">
+                            <i class="fas fa-video"></i>
+                            <span class="stat-label">Vidéos</span>
+                            <div class="stat-value" id="video-count">...</div>
+                        </div>
+                    </div>
+                    <div class="youtube-cta mt-4">
+                        <a href="https://www.youtube.com/channel/UC7U3-M0AlVs2U20PByKMpXg" 
+                           class="btn btn-youtube btn-lg w-100" 
+                           target="_blank">
+                            <i class="fab fa-youtube"></i> S'abonner à notre chaîne
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Animation des statistiques
+function animateStats() {
+    const stats = document.querySelectorAll('.stat-number');
+    stats.forEach(stat => {
+        const target = parseInt(stat.getAttribute('data-count'));
+        let current = 0;
+        const increment = target / 50; // Animation en 50 étapes
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                clearInterval(timer);
+                current = target;
+            }
+            stat.textContent = Math.round(current);
+        }, 20);
+    });
+}
+
+// Déclenchement de l'animation au scroll
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            animateStats();
+            observer.unobserve(entry.target);
+        }
+    });
+});
+
+document.querySelectorAll('.stats-section').forEach(section => {
+    observer.observe(section);
+});
+
+// Effet de parallaxe pour le hero
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+    const heroBackground = document.querySelector('.hero-background');
+    if (heroBackground) {
+        heroBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
+        }
+    });
+</script>
+{% endblock %}

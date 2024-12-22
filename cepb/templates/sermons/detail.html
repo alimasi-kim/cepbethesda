@@ -1,0 +1,274 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Sermon Header -->
+<section class="sermon-header position-relative">
+    <div class="sermon-cover" style="background-image: url('{{ sermon.image.url }}');">
+        <div class="overlay"></div>
+        <div class="container position-relative">
+            <div class="row min-vh-50 align-items-end pb-5">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'cepb:home' %}" class="text-white">Accueil</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'cepb:sermon_list' %}" class="text-white">Sermons</a></li>
+                            <li class="breadcrumb-item active text-white" aria-current="page">{{ sermon.title }}</li>
+                        </ol>
+                    </nav>
+                    <h1 class="text-white display-4">{{ sermon.title }}</h1>
+                    <div class="sermon-meta text-white mt-3">
+                        <span class="me-4">
+                            <i class="fas fa-user"></i>
+                            {{ sermon.preacher }}
+                        </span>
+                        <span class="me-4">
+                            <i class="fas fa-calendar"></i>
+                            {{ sermon.date|date:"d/m/Y" }}
+                        </span>
+                        <span>
+                            <i class="fas fa-folder"></i>
+                            {{ sermon.category }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Sermon Content -->
+<section class="sermon-content py-5">
+    <div class="container">
+        <div class="row">
+            <!-- Main Content -->
+            <div class="col-lg-8">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <!-- Media Player -->
+                        {% if sermon.video_url %}
+                        <div class="video-container mb-4">
+                            <div class="ratio ratio-16x9">
+                                <iframe src="{{ sermon.video_url }}" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {% if sermon.audio_file %}
+                        <div class="audio-player mb-4">
+                            <audio controls class="w-100">
+                                <source src="{{ sermon.audio_file.url }}" type="audio/mpeg">
+                                Votre navigateur ne supporte pas la lecture audio.
+                            </audio>
+                        </div>
+                        {% endif %}
+
+                        <!-- Scripture Reference -->
+                        <div class="scripture-reference mb-4">
+                            <h3>Référence Biblique</h3>
+                            <div class="scripture-box p-3 bg-light rounded">
+                                <i class="fas fa-book-open text-primary me-2"></i>
+                                {{ sermon.scripture_reference }}
+                            </div>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="sermon-description">
+                            <h3>Description</h3>
+                            {{ sermon.description|linebreaks }}
+                        </div>
+
+                        <!-- Notes -->
+                        {% if sermon.notes %}
+                        <div class="sermon-notes mt-4">
+                            <h3>Notes du Sermon</h3>
+                            {{ sermon.notes|linebreaks }}
+                        </div>
+                        {% endif %}
+
+                        <!-- Download Section -->
+                        <div class="download-section mt-4">
+                            <h3>Téléchargements</h3>
+                            <div class="row g-3">
+                                {% if sermon.audio_file %}
+                                <div class="col-md-6">
+                                    <a href="{{ sermon.audio_file.url }}" class="btn btn-outline-primary w-100" download>
+                                        <i class="fas fa-download me-2"></i>
+                                        Télécharger l'audio (MP3)
+                                    </a>
+                                </div>
+                                {% endif %}
+                                {% if sermon.pdf_notes %}
+                                <div class="col-md-6">
+                                    <a href="{{ sermon.pdf_notes.url }}" class="btn btn-outline-primary w-100" download>
+                                        <i class="fas fa-file-pdf me-2"></i>
+                                        Télécharger les notes (PDF)
+                                    </a>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Share -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h3>Partager ce sermon</h3>
+                        <div class="social-share mt-3">
+                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" class="btn btn-facebook me-2" target="_blank">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ sermon.title }}" class="btn btn-twitter me-2" target="_blank">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="https://wa.me/?text={{ sermon.title }}%20{{ request.build_absolute_uri }}" class="btn btn-whatsapp me-2" target="_blank">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                            <a href="mailto:?subject={{ sermon.title }}&body={{ request.build_absolute_uri }}" class="btn btn-email">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Preacher Info -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body text-center">
+                        <img src="{{ sermon.preacher.image.url }}" alt="{{ sermon.preacher }}" class="rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+                        <h4>{{ sermon.preacher }}</h4>
+                        <p class="text-muted">Prédicateur</p>
+                        <p>{{ sermon.preacher.bio }}</p>
+                        <div class="preacher-social mt-3">
+                            {% if sermon.preacher.facebook %}
+                            <a href="{{ sermon.preacher.facebook }}" class="btn btn-sm btn-outline-primary me-2">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            {% endif %}
+                            {% if sermon.preacher.twitter %}
+                            <a href="{{ sermon.preacher.twitter }}" class="btn btn-sm btn-outline-primary me-2">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            {% endif %}
+                            {% if sermon.preacher.website %}
+                            <a href="{{ sermon.preacher.website }}" class="btn btn-sm btn-outline-primary">
+                                <i class="fas fa-globe"></i>
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Related Sermons -->
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h3>Sermons similaires</h3>
+                        <div class="related-sermons">
+                            {% for related in related_sermons %}
+                            <div class="related-sermon-item mb-3">
+                                <a href="{% url 'cepb:sermon_detail' related.pk %}" class="text-decoration-none">
+                                    <div class="d-flex align-items-center">
+                                        <img src="{{ related.image.url }}" alt="{{ related.title }}" class="rounded" style="width: 80px; height: 60px; object-fit: cover;">
+                                        <div class="ms-3">
+                                            <h5 class="mb-1">{{ related.title }}</h5>
+                                            <small class="text-muted">{{ related.date|date:"d/m/Y" }}</small>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.sermon-cover {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    min-height: 50vh;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.6);
+}
+
+.sermon-meta i {
+    margin-right: 8px;
+}
+
+.scripture-box {
+    border-left: 4px solid var(--bs-primary);
+}
+
+.video-container {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.audio-player audio {
+    border-radius: 30px;
+}
+
+.social-share .btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.btn-facebook {
+    background-color: #3b5998;
+    color: white;
+}
+
+.btn-twitter {
+    background-color: #1da1f2;
+    color: white;
+}
+
+.btn-whatsapp {
+    background-color: #25d366;
+    color: white;
+}
+
+.btn-email {
+    background-color: #ea4335;
+    color: white;
+}
+
+.social-share .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.related-sermon-item {
+    transition: transform 0.3s ease;
+}
+
+.related-sermon-item:hover {
+    transform: translateX(5px);
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    color: white;
+}
+</style>
+{% endblock %} 

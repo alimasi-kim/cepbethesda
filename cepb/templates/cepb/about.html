@@ -1,0 +1,769 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header bg-primary text-white py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 text-center">
+                <div class="logo-container mb-4">
+                    <img src="{% static 'images/cepb-logo.jpg' %}" alt="CEPB Logo" class="logo-img">
+                </div>
+                <h1 class="display-4">À Propos de Nous</h1>
+                <div class="title-separator">
+                    <span></span>
+                    <i class="fas fa-church"></i>
+                    <span></span>
+                </div>
+                <p class="lead">Découvrez la Communauté Évangélique Piscine de Bethesda</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Notre Histoire -->
+<section class="history-section py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6" data-aos="fade-right">
+                <div class="content-box">
+                    <h2 class="section-title">Notre Histoire</h2>
+                    <div class="history-timeline">
+                        <div class="timeline-item">
+                            <div class="year">2011</div>
+                            <div class="content">
+                                <h4>Fondation</h4>
+                                <p>Fondée à Lubumbashi par l'Évêque Élie Pundu, la Communauté Évangélique Piscine de Bethesda est née d'une vision divine pour apporter la guérison et la restauration spirituelle.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="year">2011-2023</div>
+                            <div class="content">
+                                <h4>Croissance et Impact</h4>
+                                <p>La communauté s'est développée pour devenir un mouvement de foi majeur, touchant de nombreuses vies à travers la République Démocratique du Congo et au-delà.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="year">Aujourd'hui</div>
+                            <div class="content">
+                                <h4>Un Phare Spirituel</h4>
+                                <p>La CEPB continue d'étendre son influence, offrant un refuge pour les âmes et proclamant l'Évangile de Jésus-Christ avec une vision internationale.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left">
+                <div class="history-quote">
+                    <blockquote>
+                        <i class="fas fa-quote-left"></i>
+                        <p>Inspirée du récit biblique de la Piscine de Bethesda (Jean 5:1-15), notre communauté s'est imposée comme un mouvement de foi, un refuge pour les âmes et un vecteur de l'Évangile de Jésus-Christ.</p>
+                        <cite>- Évêque Élie Pundu, Fondateur</cite>
+                    </blockquote>
+                    <div class="scripture-reference mt-4">
+                        <h5>Notre Inspiration Biblique</h5>
+                        <p><em>"Or, à Jérusalem, près de la porte des brebis, il y a une piscine qui s'appelle en hébreu Béthesda, et qui a cinq portiques."</em></p>
+                        <p class="reference">- Jean 5:2</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Mission et Vision -->
+<section class="mission-vision-section py-5">
+    <div class="container">
+        <!-- Mission -->
+        <div class="row align-items-center mb-5">
+            <div class="col-lg-6" data-aos="fade-right">
+                <div class="content-box">
+                    <h2 class="section-title">Notre Mission</h2>
+                    <p class="lead">La communauté évangélique Piscine de Bethesda a pour mission de proclamer l'Évangile de Jésus-Christ à toutes les nations, en offrant un espace de restauration spirituelle, de guérison et de transformation des vies par la puissance de la Parole et du Saint-Esprit.</p>
+                    <p>Elle s'engage à former des disciples engagés et à manifester l'amour de Dieu à travers des actions concrètes d'entraide et de solidarité.</p>
+                    <div class="mission-points mt-4">
+                        <div class="point">
+                            <i class="fas fa-cross text-primary"></i>
+                            <span>Proclamer l'Évangile</span>
+                        </div>
+                        <div class="point">
+                            <i class="fas fa-heart text-primary"></i>
+                            <span>Restauration spirituelle</span>
+                        </div>
+                        <div class="point">
+                            <i class="fas fa-hands-helping text-primary"></i>
+                            <span>Entraide et solidarité</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left">
+                <img src="{% static 'images/kim2.jpg' %}" alt="Notre Mission" class="img-fluid rounded shadow">
+            </div>
+        </div>
+
+        <!-- Vision -->
+        <div class="row align-items-center flex-row-reverse">
+            <div class="col-lg-6" data-aos="fade-left">
+                <div class="content-box">
+                    <h2 class="section-title">Notre Vision</h2>
+                    <p class="lead">Devenir une communauté chrétienne rayonnante et reconnue dans le monde entier pour son impact dans l'évangélisation, la restauration des âmes et l'unité du corps de Christ.</p>
+                    <p>La vision est de voir des multitudes venir à la foi en Christ et d'établir des églises solides qui reflètent les valeurs du royaume de Dieu tout en étant des témoins vivants de l'amour et de la grâce divine.</p>
+                    <div class="vision-points mt-4">
+                        <div class="point">
+                            <i class="fas fa-globe text-primary"></i>
+                            <span>Impact mondial</span>
+                        </div>
+                        <div class="point">
+                            <i class="fas fa-users text-primary"></i>
+                            <span>Unité du corps de Christ</span>
+                        </div>
+                        <div class="point">
+                            <i class="fas fa-church text-primary"></i>
+                            <span>Établissement d'églises</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-right">
+                <div class="vision-image-container">
+                    <img src="{% static 'images/cepb-logo.jpg' %}" alt="Notre Vision" class="img-fluid">
+                    <div class="vision-overlay">
+                        <div class="vision-quote">
+                            <i class="fas fa-quote-left"></i>
+                            <p>"Allez, faites de toutes les nations des disciples..."</p>
+                            <span>- Matthieu 28:19</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Notre Avenir -->
+<section class="future-section py-5 bg-light">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-8 text-center">
+                <h2 class="section-title">Notre Avenir</h2>
+                <p class="lead">Construire ensemble un héritage spirituel durable pour les générations futures</p>
+            </div>
+        </div>
+        <div class="row g-4">
+            <!-- Développement Spirituel -->
+            <div class="col-md-6 col-lg-4" data-aos="fade-up">
+                <div class="future-card">
+                    <div class="card-icon">
+                        <i class="fas fa-pray"></i>
+                    </div>
+                    <h3>Centre de Formation</h3>
+                    <p>Établissement d'une école biblique moderne pour former la prochaine génération de leaders spirituels avec des programmes accrédités.</p>
+                    <ul class="future-list">
+                        <li>Formation théologique avancée</li>
+                        <li>Programmes de leadership</li>
+                        <li>Études bibliques approfondies</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Impact Social -->
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="future-card">
+                    <div class="card-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3>Centre Communautaire</h3>
+                    <p>Création d'un complexe multifonctionnel pour servir la communauté avec des services sociaux et éducatifs.</p>
+                    <ul class="future-list">
+                        <li>Services d'aide sociale</li>
+                        <li>Programme d'accompagnement</li>
+                        <li>Activités culturelles</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Innovation Technologique -->
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="future-card">
+                    <div class="card-icon">
+                        <i class="fas fa-broadcast-tower"></i>
+                    </div>
+                    <h3>Média & Communication</h3>
+                    <p>Développement d'une plateforme médiatique moderne pour diffuser l'Évangile à travers les nouvelles technologies.</p>
+                    <ul class="future-list">
+                        <li>Chaîne de télévision</li>
+                        <li>Studio d'enregistrement</li>
+                        <li>Applications mobiles</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Expansion Internationale -->
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="future-card">
+                    <div class="card-icon">
+                        <i class="fas fa-globe-africa"></i>
+                    </div>
+                    <h3>Réseau International</h3>
+                    <p>Établissement d'un réseau mondial d'églises et de missions pour un impact global.</p>
+                    <ul class="future-list">
+                        <li>Implantation d'églises</li>
+                        <li>Partenariats stratégiques</li>
+                        <li>Missions internationales</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Développement Durable -->
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
+                <div class="future-card">
+                    <div class="card-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3>Projets Durables</h3>
+                    <p>Mise en place de projets écologiques et durables pour préserver la création divine.</p>
+                    <ul class="future-list">
+                        <li>Agriculture communautaire</li>
+                        <li>Énergies renouvelables</li>
+                        <li>Gestion environnementale</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Jeunesse & Éducation -->
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="500">
+                <div class="future-card">
+                    <div class="card-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Centre Jeunesse</h3>
+                    <p>Création d'espaces dédiés au développement et à l'épanouissement de la jeunesse.</p>
+                    <ul class="future-list">
+                        <li>Programmes éducatifs</li>
+                        <li>Activités sportives</li>
+                        <li>Mentorat professionnel</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Nos Statistiques -->
+<section class="stats-section py-5 bg-light">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-3 mb-4" data-aos="fade-up">
+                <div class="stat-item">
+                    <i class="fas fa-church fa-3x text-primary mb-3"></i>
+                    <h3 class="stat-number">{{ stats.churches_count }}</h3>
+                    <p class="stat-label">Églises</p>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="stat-item">
+                    <i class="fas fa-users fa-3x text-primary mb-3"></i>
+                    <h3 class="stat-number">{{ stats.members_count }}</h3>
+                    <p class="stat-label">Membres</p>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="stat-item">
+                    <i class="fas fa-bible fa-3x text-primary mb-3"></i>
+                    <h3 class="stat-number">{{ stats.sermons_count }}</h3>
+                    <p class="stat-label">Prédications</p>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="stat-item">
+                    <i class="fas fa-hands-helping fa-3x text-primary mb-3"></i>
+                    <h3 class="stat-number">{{ stats.activities_count }}</h3>
+                    <p class="stat-label">Activités</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Nos Églises -->
+<section class="churches-section py-5">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Nos Églises</h2>
+        <div class="row">
+            {% for church in churches %}
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter|multiply:100 }}">
+                <div class="church-card">
+                    <img src="{{ church.image.url }}" alt="{{ church.name }}" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ church.name }}</h5>
+                        <p class="card-text">{{ church.description|truncatewords:30 }}</p>
+                        <a href="{% url 'cepb:church_detail' church.pk %}" class="btn btn-primary">En savoir plus</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="cta-section py-5 bg-primary text-white text-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h2 class="mb-4">Rejoignez-nous ce dimanche</h2>
+                <p class="lead mb-4">Venez vivre une expérience spirituelle enrichissante avec nous</p>
+                <a href="{% url 'cepb:contact' %}" class="btn btn-light btn-lg">Contactez-nous</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.vision-section {
+    background-color: #fff;
+}
+
+.vision-content li {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.vision-content i {
+    margin-right: 1rem;
+    font-size: 1.25rem;
+}
+
+.stat-item {
+    padding: 2rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-5px);
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--bs-primary);
+    margin: 1rem 0;
+}
+
+.stat-label {
+    font-size: 1.1rem;
+    color: #666;
+}
+
+.church-card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    height: 100%;
+}
+
+.church-card:hover {
+    transform: translateY(-5px);
+}
+
+.church-card img {
+    height: 200px;
+    object-fit: cover;
+}
+
+.church-card .card-body {
+    padding: 1.5rem;
+}
+
+.title-separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.title-separator span {
+    display: block;
+    width: 50px;
+    height: 2px;
+    background-color: rgba(255,255,255,0.5);
+}
+
+.title-separator i {
+    font-size: 1.5rem;
+}
+
+.section-title {
+    position: relative;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background-color: var(--bs-primary);
+}
+
+.text-center .section-title::after {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.mission-vision-section {
+    background-color: #fff;
+}
+
+.content-box {
+    padding: 2rem;
+}
+
+.mission-points,
+.vision-points {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.point {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.point:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.point i {
+    font-size: 1.5rem;
+}
+
+.point span {
+    font-weight: 500;
+}
+
+/* Styles pour la section Notre Avenir */
+.future-section {
+    background: linear-gradient(to bottom, #f8f9fa, #fff);
+}
+
+.future-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    height: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.future-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+.future-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--bs-primary);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.future-card:hover::before {
+    transform: scaleX(1);
+}
+
+.card-icon {
+    width: 70px;
+    height: 70px;
+    background: var(--bs-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.card-icon i {
+    font-size: 2rem;
+    color: white;
+}
+
+.future-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--bs-primary);
+}
+
+.future-card p {
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.future-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.future-list li {
+    padding-left: 1.5rem;
+    position: relative;
+    margin-bottom: 0.5rem;
+    color: #555;
+}
+
+.future-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--bs-primary);
+}
+
+/* Styles pour la section Histoire */
+.history-section {
+    background-color: #fff;
+    position: relative;
+}
+
+.history-timeline {
+    position: relative;
+    padding-left: 2rem;
+}
+
+.history-timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--bs-primary);
+}
+
+.timeline-item {
+    position: relative;
+    padding-bottom: 2rem;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2.4rem;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--bs-primary);
+    border: 4px solid #fff;
+    box-shadow: 0 0 0 2px var(--bs-primary);
+}
+
+.year {
+    font-weight: bold;
+    color: var(--bs-primary);
+    margin-bottom: 0.5rem;
+}
+
+.timeline-item h4 {
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-item p {
+    color: #666;
+}
+
+.history-quote {
+    background: #f8f9fa;
+    padding: 3rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.history-quote blockquote {
+    position: relative;
+    padding: 0 2rem;
+}
+
+.history-quote i.fa-quote-left {
+    font-size: 2rem;
+    color: var(--bs-primary);
+    opacity: 0.3;
+    position: absolute;
+    left: 0;
+    top: -1rem;
+}
+
+.history-quote cite {
+    display: block;
+    margin-top: 1rem;
+    color: var(--bs-primary);
+    font-style: normal;
+    font-weight: 500;
+}
+
+.scripture-reference {
+    border-top: 2px solid rgba(0,0,0,0.1);
+    padding-top: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.scripture-reference h5 {
+    color: var(--bs-primary);
+    margin-bottom: 1rem;
+}
+
+.scripture-reference em {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555;
+}
+
+.scripture-reference .reference {
+    color: #666;
+    font-weight: 500;
+}
+
+/* Style pour le logo */
+.logo-container {
+    margin-bottom: 2rem;
+}
+
+.logo-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    padding: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.logo-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+}
+
+.vision-image-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    background: #1a237e;  /* Fond bleu foncé */
+    padding: 2rem;
+    text-align: center;
+}
+
+.vision-image-container img {
+    width: 80%;
+    max-width: 400px;
+    height: auto;
+    margin: 0 auto;
+    transition: transform 0.5s ease;
+}
+
+.vision-image-container:hover img {
+    transform: scale(1.05);
+}
+
+.vision-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(26,35,126,0.9), transparent);
+    padding: 2rem;
+    color: white;
+}
+
+.vision-quote {
+    text-align: center;
+}
+
+.vision-quote i {
+    font-size: 2rem;
+    color: var(--bs-primary);
+    margin-bottom: 1rem;
+}
+
+.vision-quote p {
+    font-size: 1.2rem;
+    font-style: italic;
+    margin-bottom: 0.5rem;
+}
+
+.vision-quote span {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Animation des statistiques
+function animateStats() {
+    const stats = document.querySelectorAll('.stat-number');
+    stats.forEach(stat => {
+        const target = parseInt(stat.textContent);
+        let current = 0;
+        const increment = target / 50;
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                clearInterval(timer);
+                current = target;
+            }
+            stat.textContent = Math.round(current);
+        }, 20);
+    });
+}
+
+// Observer pour déclencher l'animation
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            animateStats();
+            observer.unobserve(entry.target);
+        }
+    });
+});
+
+// Observer la section des statistiques
+const statsSection = document.querySelector('.stats-section');
+if (statsSection) {
+    observer.observe(statsSection);
+}
+</script>
+{% endblock %} 

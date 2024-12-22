@@ -1,0 +1,232 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Church Header -->
+<section class="church-header position-relative">
+    <div class="church-cover" style="background-image: url('{{ church.image.url }}');">
+        <div class="overlay"></div>
+        <div class="container position-relative">
+            <div class="row min-vh-50 align-items-end pb-5">
+                <div class="col-12">
+                    <h1 class="text-white display-4">{{ church.name }}</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'cepb:home' %}" class="text-white">Accueil</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'cepb:church_list' %}" class="text-white">Églises</a></li>
+                            <li class="breadcrumb-item active text-white" aria-current="page">{{ church.name }}</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Church Info -->
+<section class="church-info py-5">
+    <div class="container">
+        <div class="row">
+            <!-- Main Content -->
+            <div class="col-lg-8">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h2 class="card-title">À propos de notre église</h2>
+                        <p class="lead">{{ church.description }}</p>
+                        
+                        <!-- Services Schedule -->
+                        <div class="services-schedule mt-4">
+                            <h3>Horaires des services</h3>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Jour</th>
+                                            <th>Service</th>
+                                            <th>Heure</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Dimanche</td>
+                                            <td>Culte principal</td>
+                                            <td>10:00 - 12:00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Mercredi</td>
+                                            <td>Étude biblique</td>
+                                            <td>19:00 - 20:30</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Vendredi</td>
+                                            <td>Prière</td>
+                                            <td>19:00 - 20:30</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Ministries -->
+                        <div class="ministries mt-4">
+                            <h3>Nos ministères</h3>
+                            <div class="row g-4">
+                                <div class="col-md-4">
+                                    <div class="ministry-card text-center p-3">
+                                        <i class="fas fa-music fa-2x text-primary mb-3"></i>
+                                        <h4>Louange</h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="ministry-card text-center p-3">
+                                        <i class="fas fa-child fa-2x text-primary mb-3"></i>
+                                        <h4>Jeunesse</h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="ministry-card text-center p-3">
+                                        <i class="fas fa-hands-helping fa-2x text-primary mb-3"></i>
+                                        <h4>Action sociale</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery -->
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h3>Galerie photos</h3>
+                        <div class="row g-3">
+                            {% for image in church.images.all %}
+                            <div class="col-md-4">
+                                <a href="{{ image.image.url }}" class="gallery-item" data-fslightbox="gallery">
+                                    <img src="{{ image.image.url }}" alt="Image de l'église" class="img-fluid rounded">
+                                </a>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Contact Info -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h3>Informations de contact</h3>
+                        <ul class="list-unstyled">
+                            <li class="mb-3">
+                                <i class="fas fa-map-marker-alt text-primary me-2"></i>
+                                {{ church.location }}
+                            </li>
+                            <li class="mb-3">
+                                <i class="fas fa-phone text-primary me-2"></i>
+                                <a href="tel:{{ church.phone }}" class="text-decoration-none">{{ church.phone }}</a>
+                            </li>
+                            <li class="mb-3">
+                                <i class="fas fa-envelope text-primary me-2"></i>
+                                <a href="mailto:{{ church.email }}" class="text-decoration-none">{{ church.email }}</a>
+                            </li>
+                        </ul>
+                        <div class="mt-4">
+                            <a href="{% url 'cepb:contact' %}" class="btn btn-primary w-100">Nous contacter</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pastor Info -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body text-center">
+                        <img src="{{ church.pastor_image.url }}" alt="{{ church.pastor_name }}" class="rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+                        <h4>{{ church.pastor_name }}</h4>
+                        <p class="text-muted">Pasteur</p>
+                        <p>{{ church.pastor_bio }}</p>
+                    </div>
+                </div>
+
+                <!-- Map -->
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h3>Localisation</h3>
+                        <div id="map" style="height: 300px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.church-cover {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    min-height: 50vh;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.6);
+}
+
+.ministry-card {
+    border: 1px solid #eee;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.ministry-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.gallery-item {
+    display: block;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.gallery-item img {
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    color: white;
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://unpkg.com/fslightbox"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY"></script>
+<script>
+// Initialize Google Maps
+function initMap() {
+    const churchLocation = { lat: {{ church.latitude }}, lng: {{ church.longitude }} };
+    const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 15,
+        center: churchLocation,
+    });
+    const marker = new google.maps.Marker({
+        position: churchLocation,
+        map: map,
+        title: "{{ church.name }}"
+    });
+}
+
+window.addEventListener('load', initMap);
+</script>
+{% endblock %} 

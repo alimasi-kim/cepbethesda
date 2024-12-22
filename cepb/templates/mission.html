@@ -1,0 +1,263 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Notre Mission - CEPB{% endblock %}
+
+{% block content %}
+<div class="mission-page">
+    <!-- Hero Section -->
+    <section class="mission-hero py-5 bg-primary text-white">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h1 class="display-4 fw-bold mb-4">Notre Mission</h1>
+                    <div class="title-separator">
+                        <span class="bg-white"></span>
+                        <i class="fas fa-cross"></i>
+                        <span class="bg-white"></span>
+                    </div>
+                    <p class="lead mb-0">"Allez, faites de toutes les nations des disciples..." - Matthieu 28:19</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="mission-content py-5">
+        <div class="container">
+            <div class="row g-4">
+                <!-- Mission Statement -->
+                <div class="col-lg-8 mx-auto text-center mb-5">
+                    <div class="mission-statement p-4">
+                        <h2 class="h1 mb-4">Notre Raison d'Être</h2>
+                        <p class="lead">
+                            La Communauté Évangélique Piscine de Bethesda existe pour glorifier Dieu en faisant des disciples 
+                            qui transforment leur communauté par l'amour du Christ.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Mission Pillars -->
+                <div class="col-md-4">
+                    <div class="mission-pillar">
+                        <div class="pillar-icon">
+                            <i class="fas fa-church"></i>
+                        </div>
+                        <h3>Adorer</h3>
+                        <p>Célébrer la grandeur de Dieu à travers une adoration authentique et transformatrice.</p>
+                        <ul class="pillar-points">
+                            <li>Cultes dynamiques</li>
+                            <li>Prière et intercession</li>
+                            <li>Louange et adoration</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="mission-pillar">
+                        <div class="pillar-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Former</h3>
+                        <p>Équiper les croyants pour une vie chrétienne efficace et un service fructueux.</p>
+                        <ul class="pillar-points">
+                            <li>Enseignement biblique</li>
+                            <li>Formations pratiques</li>
+                            <li>Mentorat spirituel</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="mission-pillar">
+                        <div class="pillar-icon">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <h3>Servir</h3>
+                        <p>Démontrer l'amour du Christ à travers le service et l'engagement communautaire.</p>
+                        <ul class="pillar-points">
+                            <li>Actions sociales</li>
+                            <li>Soutien aux nécessiteux</li>
+                            <li>Projets communautaires</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Values Section -->
+            <div class="row mt-5">
+                <div class="col-12">
+                    <h2 class="text-center mb-5">Nos Valeurs Fondamentales</h2>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="value-card">
+                        <i class="fas fa-book-open"></i>
+                        <h4>La Parole</h4>
+                        <p>Fondés sur la Bible comme autorité suprême pour la foi et la pratique.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="value-card">
+                        <i class="fas fa-heart"></i>
+                        <h4>L'Amour</h4>
+                        <p>Manifestation concrète de l'amour de Dieu envers tous.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="value-card">
+                        <i class="fas fa-hands-helping"></i>
+                        <h4>L'Unité</h4>
+                        <p>Unis dans la diversité pour accomplir la mission de Dieu.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="value-card">
+                        <i class="fas fa-seedling"></i>
+                        <h4>La Croissance</h4>
+                        <p>Engagement pour la croissance spirituelle continue.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="row mt-5">
+                <div class="col-lg-8 mx-auto">
+                    <div class="mission-cta text-center">
+                        <h3>Rejoignez-nous dans cette Mission</h3>
+                        <p class="mb-4">Découvrez comment vous pouvez participer à l'œuvre de Dieu dans notre communauté</p>
+                        <div class="cta-buttons">
+                            <a href="{% url 'contact' %}" class="btn btn-primary btn-lg me-3">Nous Contacter</a>
+                            <a href="{% url 'activities' %}" class="btn btn-outline-primary btn-lg">Nos Activités</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+/* Hero Section */
+.mission-hero {
+    background: linear-gradient(135deg, var(--bs-primary) 0%, #2c3e50 100%);
+    padding: 6rem 0;
+}
+
+.title-separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1.5rem 0;
+}
+
+.title-separator span {
+    height: 2px;
+    width: 50px;
+    background: currentColor;
+    margin: 0 15px;
+}
+
+/* Mission Statement */
+.mission-statement {
+    background: rgba(var(--bs-primary-rgb), 0.1);
+    border-radius: 15px;
+    margin-top: -3rem;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+/* Mission Pillars */
+.mission-pillar {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    height: 100%;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.mission-pillar:hover {
+    transform: translateY(-5px);
+}
+
+.pillar-icon {
+    font-size: 2.5rem;
+    color: var(--bs-primary);
+    margin-bottom: 1.5rem;
+    height: 80px;
+    width: 80px;
+    line-height: 80px;
+    text-align: center;
+    border-radius: 50%;
+    background: rgba(var(--bs-primary-rgb), 0.1);
+    margin: 0 auto 1.5rem;
+}
+
+.pillar-points {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 1rem;
+}
+
+.pillar-points li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.pillar-points li:last-child {
+    border-bottom: none;
+}
+
+/* Values Cards */
+.value-card {
+    text-align: center;
+    padding: 2rem;
+    background: white;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.value-card:hover {
+    transform: translateY(-5px);
+}
+
+.value-card i {
+    font-size: 2.5rem;
+    color: var(--bs-primary);
+    margin-bottom: 1rem;
+}
+
+/* CTA Section */
+.mission-cta {
+    background: rgba(var(--bs-primary-rgb), 0.1);
+    padding: 3rem;
+    border-radius: 15px;
+}
+
+.cta-buttons {
+    margin-top: 2rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .mission-hero {
+        padding: 4rem 0;
+    }
+    
+    .mission-statement {
+        margin-top: -2rem;
+    }
+    
+    .cta-buttons .btn {
+        display: block;
+        margin: 1rem auto;
+        width: 100%;
+        max-width: 300px;
+    }
+}
+</style>
+{% endblock %} 

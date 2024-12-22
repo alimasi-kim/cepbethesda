@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header bg-primary text-white py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="display-4">Notre Vision</h1>
+                <div class="title-separator">
+                    <span></span>
+                    <i class="fas fa-eye"></i>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Vision Content -->
+<section class="vision-content py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center mb-5">
+                <h2 class="section-title">Jean 5:2-4</h2>
+                <p class="lead">
+                    "Or, à Jérusalem, près de la porte des brebis, il y a une piscine qui s'appelle en hébreu Béthesda, 
+                    et qui a cinq portiques. Sous ces portiques étaient couchés en grand nombre des malades, des aveugles, 
+                    des boiteux, des paralytiques, qui attendaient le mouvement de l'eau; car un ange descendait de temps 
+                    en temps dans la piscine, et agitait l'eau; et celui qui y descendait le premier après que l'eau avait 
+                    été agitée était guéri, quelle que fût sa maladie."
+                </p>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-4" data-aos="fade-up">
+                <div class="vision-pillar">
+                    <div class="pillar-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3>Transformation</h3>
+                    <p>Être un instrument de transformation spirituelle et sociale dans notre communauté.</p>
+                </div>
+            </div>
+            
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="vision-pillar">
+                    <div class="pillar-icon">
+                        <i class="fas fa-book-reader"></i>
+                    </div>
+                    <h3>Formation</h3>
+                    <p>Former des disciples matures selon les Écritures pour impacter leur génération.</p>
+                </div>
+            </div>
+            
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="vision-pillar">
+                    <div class="pillar-icon">
+                        <i class="fas fa-globe-africa"></i>
+                    </div>
+                    <h3>Impact Global</h3>
+                    <p>Étendre notre influence pour toucher les nations avec l'Évangile.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Strategic Goals -->
+<section class="strategic-goals py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="section-title">Nos Objectifs Stratégiques</h2>
+                <div class="title-separator">
+                    <span></span>
+                    <i class="fas fa-bullseye"></i>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-6" data-aos="fade-right">
+                <div class="goal-card">
+                    <div class="goal-header">
+                        <i class="fas fa-church"></i>
+                        <h3>Croissance Spirituelle</h3>
+                    </div>
+                    <ul class="goal-list">
+                        <li>Développer des programmes de formation biblique solides</li>
+                        <li>Encourager la prière et l'étude personnelle</li>
+                        <li>Mettre en place des groupes de croissance</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="col-lg-6" data-aos="fade-left">
+                <div class="goal-card">
+                    <div class="goal-header">
+                        <i class="fas fa-hands-helping"></i>
+                        <h3>Impact Communautaire</h3>
+                    </div>
+                    <ul class="goal-list">
+                        <li>Développer des programmes d'aide sociale</li>
+                        <li>Soutenir les familles dans le besoin</li>
+                        <li>Organiser des événements communautaires</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="cta-section py-5 text-white text-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8" data-aos="fade-up">
+                <h2 class="mb-4">Participez à Notre Vision</h2>
+                <p class="lead mb-4">Ensemble, nous pouvons faire une différence dans notre génération</p>
+                <div class="cta-buttons">
+                    <a href="{% url 'contact' %}" class="btn btn-light btn-lg me-3">Nous Rejoindre</a>
+                    <a href="{% url 'activities' %}" class="btn btn-outline-light btn-lg">Nos Activités</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} 

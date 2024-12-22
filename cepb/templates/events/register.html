@@ -1,0 +1,306 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header bg-primary text-white py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="display-4">Inscription à l'événement</h1>
+                <div class="title-separator">
+                    <span></span>
+                    <i class="fas fa-ticket-alt"></i>
+                    <span></span>
+                </div>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item"><a href="{% url 'cepb:home' %}" class="text-white">Accueil</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'cepb:event_list' %}" class="text-white">Événements</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'cepb:event_detail' event.pk %}" class="text-white">{{ event.title }}</a></li>
+                        <li class="breadcrumb-item active text-white" aria-current="page">Inscription</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Registration Form -->
+<section class="registration-form py-5">
+    <div class="container">
+        <div class="row">
+            <!-- Form Column -->
+            <div class="col-lg-8">
+                <div class="card shadow-sm">
+                    <div class="card-body p-4">
+                        <h2 class="card-title mb-4">Formulaire d'inscription</h2>
+
+                        {% if messages %}
+                        <div class="messages mb-4">
+                            {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+
+                        <form method="post" class="registration-form">
+                            {% csrf_token %}
+                            
+                            <!-- Personal Information -->
+                            <div class="personal-info mb-4">
+                                <h3 class="form-section-title">Informations personnelles</h3>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="firstName" name="first_name" placeholder="Prénom" required>
+                                            <label for="firstName">Prénom</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="lastName" name="last_name" placeholder="Nom" required>
+                                            <label for="lastName">Nom</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                                            <label for="email">Email</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="tel" class="form-control" id="phone" name="phone" placeholder="Téléphone" required>
+                                            <label for="phone">Téléphone</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Additional Information -->
+                            <div class="additional-info mb-4">
+                                <h3 class="form-section-title">Informations complémentaires</h3>
+                                <div class="row g-3">
+                                    {% if event.has_meal_option %}
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <select class="form-select" id="mealPreference" name="meal_preference">
+                                                <option value="">Sélectionnez une option</option>
+                                                <option value="standard">Standard</option>
+                                                <option value="vegetarian">Végétarien</option>
+                                                <option value="vegan">Végan</option>
+                                                <option value="gluten_free">Sans gluten</option>
+                                            </select>
+                                            <label for="mealPreference">Préférence de repas</label>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    
+                                    {% if event.has_accommodation %}
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <select class="form-select" id="accommodation" name="accommodation">
+                                                <option value="no">Non</option>
+                                                <option value="yes">Oui</option>
+                                            </select>
+                                            <label for="accommodation">Besoin d'hébergement ?</label>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <textarea class="form-control" id="specialRequests" name="special_requests" style="height: 100px" placeholder="Demandes spéciales"></textarea>
+                                            <label for="specialRequests">Demandes spéciales ou commentaires</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Terms and Conditions -->
+                            <div class="terms-conditions mb-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="termsAccepted" name="terms_accepted" required>
+                                    <label class="form-check-label" for="termsAccepted">
+                                        J'accepte les <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">conditions générales</a>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    {% if event.is_free %}
+                                    S'inscrire gratuitement
+                                    {% else %}
+                                    Procéder au paiement ({{ event.price }} €)
+                                    {% endif %}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event Info Column -->
+            <div class="col-lg-4">
+                <!-- Event Summary -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h3>Résumé de l'événement</h3>
+                        <div class="event-summary">
+                            <div class="event-image mb-3">
+                                <img src="{{ event.image.url }}" alt="{{ event.title }}" class="img-fluid rounded">
+                            </div>
+                            <h4>{{ event.title }}</h4>
+                            <ul class="list-unstyled event-info">
+                                <li class="mb-2">
+                                    <i class="fas fa-calendar-alt text-primary"></i>
+                                    {{ event.start_date|date:"d/m/Y" }}
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-clock text-primary"></i>
+                                    {{ event.start_time }}
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-map-marker-alt text-primary"></i>
+                                    {{ event.location }}
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-users text-primary"></i>
+                                    {{ event.available_seats }} places disponibles
+                                </li>
+                                <li>
+                                    <i class="fas fa-ticket-alt text-primary"></i>
+                                    {% if event.is_free %}
+                                    <span class="badge bg-success">Gratuit</span>
+                                    {% else %}
+                                    <span class="badge bg-primary">{{ event.price }} €</span>
+                                    {% endif %}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Support -->
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h3>Besoin d'aide ?</h3>
+                        <p>Si vous avez des questions concernant l'inscription, n'hésitez pas à nous contacter :</p>
+                        <ul class="list-unstyled contact-info">
+                            <li class="mb-2">
+                                <i class="fas fa-phone text-primary"></i>
+                                <a href="tel:{{ contact_phone }}" class="text-decoration-none">{{ contact_phone }}</a>
+                            </li>
+                            <li>
+                                <i class="fas fa-envelope text-primary"></i>
+                                <a href="mailto:{{ contact_email }}" class="text-decoration-none">{{ contact_email }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Terms and Conditions Modal -->
+<div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="termsModalLabel">Conditions générales</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Add your terms and conditions content here -->
+                <h6>1. Inscription</h6>
+                <p>L'inscription à l'événement est soumise à disponibilité...</p>
+                
+                <h6>2. Paiement</h6>
+                <p>Le paiement doit être effectué au moment de l'inscription...</p>
+                
+                <h6>3. Annulation</h6>
+                <p>En cas d'annulation de votre part...</p>
+                
+                <h6>4. Responsabilité</h6>
+                <p>L'organisateur ne peut être tenu responsable...</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.form-section-title {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: var(--bs-primary);
+}
+
+.form-floating {
+    margin-bottom: 1rem;
+}
+
+.event-info li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.event-info i {
+    width: 20px;
+}
+
+.contact-info li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.contact-info i {
+    width: 20px;
+}
+
+.title-separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.title-separator span {
+    display: block;
+    width: 50px;
+    height: 2px;
+    background-color: rgba(255,255,255,0.5);
+}
+
+.title-separator i {
+    font-size: 1.5rem;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    color: rgba(255,255,255,0.5);
+}
+
+.form-check-label a {
+    color: var(--bs-primary);
+    text-decoration: none;
+}
+
+.form-check-label a:hover {
+    text-decoration: underline;
+}
+</style>
+{% endblock %} 

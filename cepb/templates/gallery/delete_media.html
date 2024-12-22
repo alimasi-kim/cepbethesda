@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Supprimer {{ media.title }} - CEPB{% endblock %}
+
+{% block content %}
+<div class="admin-page py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Confirmer la suppression</h2>
+                    </div>
+                    <div class="card-body">
+                        <p>Êtes-vous sûr de vouloir supprimer "{{ media.title }}" ?</p>
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="text-end">
+                                <a href="{% url 'gallery' %}" class="btn btn-secondary">Annuler</a>
+                                <button type="submit" class="btn btn-danger">Confirmer la suppression</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

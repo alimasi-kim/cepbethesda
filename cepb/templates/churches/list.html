@@ -1,0 +1,205 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header bg-primary text-white py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="display-4">Nos Églises</h1>
+                <div class="title-separator">
+                    <span></span>
+                    <i class="fas fa-church"></i>
+                    <span></span>
+                </div>
+                <p class="lead">Découvrez nos différentes assemblées</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Churches Grid -->
+<section class="churches-grid py-5">
+    <div class="container">
+        <!-- Filtres -->
+        <div class="row mb-4">
+            <div class="col-md-6 offset-md-3">
+                <div class="search-box">
+                    <input type="text" class="form-control" id="churchSearch" placeholder="Rechercher une église...">
+                </div>
+            </div>
+        </div>
+
+        <!-- Liste des églises -->
+        <div class="row g-4">
+            {% for church in churches %}
+            <div class="col-md-6 col-lg-4 church-item" data-aos="fade-up" data-aos-delay="{{ forloop.counter|multiply:100 }}">
+                <div class="church-card h-100">
+                    <div class="church-image">
+                        <img src="{{ church.image.url }}" alt="{{ church.name }}" class="img-fluid">
+                        <div class="church-overlay">
+                            <a href="{% url 'cepb:church_detail' church.pk %}" class="btn btn-light">Voir détails</a>
+                        </div>
+                    </div>
+                    <div class="church-content p-4">
+                        <h3 class="church-title">{{ church.name }}</h3>
+                        <div class="church-info">
+                            <p class="location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                {{ church.location }}
+                            </p>
+                            <p class="pastor">
+                                <i class="fas fa-user"></i>
+                                {{ church.pastor_name }}
+                            </p>
+                            <p class="service-time">
+                                <i class="fas fa-clock"></i>
+                                Culte: Dimanche 10:00
+                            </p>
+                        </div>
+                        <div class="church-description">
+                            <p>{{ church.description|truncatewords:30 }}</p>
+                        </div>
+                        <div class="church-footer">
+                            <a href="{% url 'cepb:church_detail' church.pk %}" class="btn btn-primary">
+                                En savoir plus
+                            </a>
+                            <a href="tel:{{ church.phone }}" class="btn btn-outline-primary">
+                                <i class="fas fa-phone"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <p>Aucune église n'est disponible pour le moment.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="cta-section py-5 bg-primary text-white text-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h2 class="mb-4">Vous souhaitez nous rejoindre ?</h2>
+                <p class="lead mb-4">Contactez-nous pour plus d'informations sur nos églises</p>
+                <a href="{% url 'cepb:contact' %}" class="btn btn-light btn-lg">Nous contacter</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Recherche d'églises
+document.getElementById('churchSearch').addEventListener('input', function(e) {
+    const searchTerm = e.target.value.toLowerCase();
+    const churches = document.querySelectorAll('.church-item');
+    
+    churches.forEach(church => {
+        const title = church.querySelector('.church-title').textContent.toLowerCase();
+        const location = church.querySelector('.location').textContent.toLowerCase();
+        const description = church.querySelector('.church-description').textContent.toLowerCase();
+        
+        if (title.includes(searchTerm) || 
+            location.includes(searchTerm) || 
+            description.includes(searchTerm)) {
+            church.style.display = 'block';
+        } else {
+            church.style.display = 'none';
+        }
+    });
+});
+</script>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.church-card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    background: white;
+}
+
+.church-card:hover {
+    transform: translateY(-5px);
+}
+
+.church-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px 10px 0 0;
+}
+
+.church-image img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.church-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.church-card:hover .church-overlay {
+    opacity: 1;
+}
+
+.church-info {
+    margin: 15px 0;
+}
+
+.church-info p {
+    margin-bottom: 5px;
+    color: #666;
+}
+
+.church-info i {
+    width: 20px;
+    color: var(--bs-primary);
+    margin-right: 10px;
+}
+
+.church-footer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-box {
+    margin-bottom: 30px;
+}
+
+.search-box input {
+    border-radius: 30px;
+    padding: 15px 25px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.search-box input:focus {
+    box-shadow: 0 2px 15px rgba(var(--bs-primary-rgb), 0.2);
+    border-color: var(--bs-primary);
+}
+</style>
+{% endblock %} 

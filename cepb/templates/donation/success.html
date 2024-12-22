@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header bg-success text-white py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="display-4">Merci pour votre don!</h1>
+                <div class="title-separator">
+                    <span></span>
+                    <i class="fas fa-check-circle"></i>
+                    <span></span>
+                </div>
+                <p class="lead">Votre générosité contribue à notre mission</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Success Message -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <div class="success-message bg-white p-5 rounded shadow-sm">
+                    <i class="fas fa-heart text-success fa-3x mb-4"></i>
+                    <h2 class="mb-4">Don enregistré avec succès</h2>
+                    <p class="lead mb-4">
+                        Nous vous remercions sincèrement pour votre soutien. Notre équipe vous contactera bientôt avec les instructions pour finaliser votre don.
+                    </p>
+                    <div class="next-steps mt-5">
+                        <h4 class="mb-3">Prochaines étapes</h4>
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <div class="step-card p-4 rounded bg-light">
+                                    <i class="fas fa-envelope text-primary mb-3"></i>
+                                    <h5>Vérifiez votre email</h5>
+                                    <p>Vous recevrez bientôt un email de confirmation avec plus de détails.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="step-card p-4 rounded bg-light">
+                                    <i class="fas fa-hand-holding-usd text-primary mb-3"></i>
+                                    <h5>Instructions de paiement</h5>
+                                    <p>Suivez les instructions qui vous seront envoyées pour finaliser votre don.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-5">
+                        <a href="{% url 'cepb:home' %}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-home me-2"></i>Retour à l'accueil
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.title-separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+.title-separator span {
+    height: 2px;
+    width: 50px;
+    background: white;
+    margin: 0 10px;
+}
+
+.title-separator i {
+    font-size: 1.5rem;
+}
+
+.success-message {
+    border-radius: 1rem;
+}
+
+.step-card {
+    height: 100%;
+    transition: transform 0.3s ease;
+}
+
+.step-card:hover {
+    transform: translateY(-5px);
+}
+
+.step-card i {
+    font-size: 2rem;
+}
+</style>
+{% endblock %} 

@@ -1,0 +1,333 @@
+{% load static %}
+
+<footer class="main-footer py-5">
+    <div class="footer-bg"></div>
+    <div class="container position-relative">
+        <div class="row g-4">
+            <!-- Contact Info -->
+            <div class="col-lg-4">
+                <div class="footer-card">
+                    <h5 class="footer-title">Contact</h5>
+                    <ul class="list-unstyled footer-contact">
+                        <li class="footer-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Kinshasa, RD Congo</span>
+                        </li>
+                        <li class="footer-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+243810381114</span>
+                        </li>
+                        <li class="footer-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>cepbethesda@gmail.com</span>
+                        </li>
+                    </ul>
+                    <div class="social-links mt-4">
+                        <a href="#" class="social-link" title="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://www.youtube.com/channel/UC7U3-M0AlVs2U20PByKMpXg" class="social-link" target="_blank" title="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" class="social-link" title="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="col-lg-4">
+                <div class="footer-card">
+                    <h5 class="footer-title">Liens Rapides</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="{% url 'cepb:home' %}" class="footer-link"><span>Accueil</span></a></li>
+                        <li><a href="{% url 'cepb:about' %}" class="footer-link"><span>À Propos</span></a></li>
+                        <li><a href="{% url 'cepb:sermon_list' %}" class="footer-link"><span>Prédications</span></a></li>
+                        <li><a href="{% url 'cepb:event_list' %}" class="footer-link"><span>Événements</span></a></li>
+                        <li><a href="{% url 'cepb:gallery' %}" class="footer-link"><span>Galerie</span></a></li>
+                        <li><a href="{% url 'cepb:blog_list' %}" class="footer-link"><span>Blog</span></a></li>
+                        <li><a href="{% url 'cepb:contact' %}" class="footer-link"><span>Contact</span></a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="col-lg-4">
+                <div class="footer-card">
+                    <h5 class="footer-title">Newsletter</h5>
+                    <p class="newsletter-text">Inscrivez-vous pour recevoir nos actualités</p>
+                    <form action="#" method="post" class="newsletter-form">
+                        {% csrf_token %}
+                        <div class="input-group">
+                            <input type="email" name="email" class="form-control" placeholder="Votre email" required>
+                            <button type="submit" class="btn btn-primary">
+                                <span>S'inscrire</span>
+                                <i class="fas fa-arrow-right ms-2"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="footer-bottom text-center mt-5 pt-4">
+            <p class="mb-0">&copy; {% now "Y" %} CEPB. Tous droits réservés.</p>
+        </div>
+    </div>
+</footer>
+
+<style>
+.main-footer {
+    position: relative;
+    background: #0a0a1a;
+    overflow: hidden;
+}
+
+.footer-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(26, 35, 126, 0.15), rgba(13, 71, 161, 0.15));
+    z-index: 0;
+}
+
+.footer-bg::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+    animation: pulse 15s infinite;
+}
+
+.footer-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.footer-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.footer-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 0.75rem;
+    background: linear-gradient(45deg, #4CAF50, #2196F3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.footer-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(45deg, #4CAF50, #2196F3);
+    border-radius: 3px;
+}
+
+.footer-contact .footer-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.footer-contact .footer-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.footer-contact .footer-item i {
+    width: 24px;
+    margin-right: 1rem;
+    color: #4CAF50;
+}
+
+.footer-contact .footer-item span {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-link {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.social-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+}
+
+.social-link:hover::before {
+    left: 100%;
+}
+
+.social-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #4CAF50;
+    transform: translateY(-3px) scale(1.1);
+}
+
+.footer-links li {
+    margin-bottom: 0.75rem;
+}
+
+.footer-link {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: 0.5s;
+}
+
+.footer-link:hover::before {
+    left: 100%;
+}
+
+.footer-link:hover {
+    color: #4CAF50;
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateX(5px);
+}
+
+.newsletter-text {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1.5rem;
+}
+
+.newsletter-form .form-control {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+}
+
+.newsletter-form .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.newsletter-form .form-control:focus {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+}
+
+.newsletter-form .btn {
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(45deg, #4CAF50, #2196F3);
+    border: none;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.newsletter-form .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+}
+
+.newsletter-form .btn:hover::before {
+    left: 100%;
+}
+
+.newsletter-form .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-bottom p {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+@keyframes pulse {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-card {
+        margin-bottom: 1.5rem;
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
+    
+    .footer-title {
+        text-align: center;
+    }
+    
+    .footer-title::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+</style> 

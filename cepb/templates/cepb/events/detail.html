@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>{{ event.title }}</h1>
+            {% if event.image %}
+            <img src="{{ event.image.url }}" alt="{{ event.title }}" class="img-fluid mb-4">
+            {% endif %}
+            <div class="event-details">
+                <p><i class="fas fa-calendar"></i> {{ event.date|date:"d F Y" }}</p>
+                <p><i class="fas fa-clock"></i> {{ event.time }}</p>
+                <p><i class="fas fa-map-marker-alt"></i> {{ event.location }}</p>
+            </div>
+            <div class="event-description">
+                {{ event.description|linebreaks }}
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Informations</h5>
+                    <ul class="list-unstyled">
+                        <li><strong>Date:</strong> {{ event.date|date:"d F Y" }}</li>
+                        <li><strong>Heure:</strong> {{ event.time }}</li>
+                        <li><strong>Lieu:</strong> {{ event.location }}</li>
+                    </ul>
+                    {% if event.registration_required %}
+                    <a href="#" class="btn btn-primary btn-block">S'inscrire</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Faire un don - CEPB{% endblock %}
+
+{% block content %}
+<div class="donations-page py-5">
+    <div class="container">
+        <div class="section-header text-center mb-5">
+            <h1 class="section-title">Soutenez notre mission</h1>
+            <div class="title-separator">
+                <span></span>
+                <i class="fas fa-hand-holding-heart"></i>
+                <span></span>
+            </div>
+            <p class="section-description">
+                Votre don nous aide à poursuivre notre mission et à soutenir nos différents ministères
+            </p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="donation-info">
+                    <h3>Pourquoi donner ?</h3>
+                    <ul class="donation-benefits">
+                        <li><i class="fas fa-check"></i> Soutenir les projets d'évangélisation</li>
+                        <li><i class="fas fa-check"></i> Aider les personnes dans le besoin</li>
+                        <li><i class="fas fa-check"></i> Contribuer au développement de l'église</li>
+                        <li><i class="fas fa-check"></i> Participer à la formation des leaders</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="donation-methods">
+                    <h3>Méthodes de don</h3>
+                    <div class="payment-options">
+                        <div class="payment-option">
+                            <h4>Virement bancaire</h4>
+                            <p>Banque : [Nom de la banque]</p>
+                            <p>IBAN : [Numéro IBAN]</p>
+                            <p>BIC : [Code BIC]</p>
+                        </div>
+                        <div class="payment-option">
+                            <h4>Mobile Money</h4>
+                            <p>M-PESA : [Numéro]</p>
+                            <p>Orange Money : [Numéro]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

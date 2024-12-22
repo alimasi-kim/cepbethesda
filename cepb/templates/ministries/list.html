@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Nos Ministères - CEPB{% endblock %}
+
+{% block content %}
+<div class="ministries-page py-5">
+    <div class="container">
+        <div class="section-header text-center mb-5">
+            <h1 class="section-title">Nos Ministères</h1>
+            <div class="title-separator">
+                <span></span>
+                <i class="fas fa-hands-helping"></i>
+                <span></span>
+            </div>
+            <p class="lead mt-3">Découvrez les différents ministères de notre église et comment vous pouvez vous impliquer</p>
+        </div>
+
+        <div class="row g-4">
+            <!-- Ministère des Jeunes -->
+            <div class="col-md-6 col-lg-4">
+                <div class="ministry-card">
+                    <div class="ministry-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Jeunesse</h3>
+                    <p>Un espace dédié aux jeunes pour grandir dans la foi et développer leurs talents.</p>
+                    <ul class="ministry-details">
+                        <li><i class="fas fa-clock"></i> Samedi 15h00</li>
+                        <li><i class="fas fa-user"></i> Responsable: Fr. Jean</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Ministère des Enfants -->
+            <div class="col-md-6 col-lg-4">
+                <div class="ministry-card">
+                    <div class="ministry-icon">
+                        <i class="fas fa-child"></i>
+                    </div>
+                    <h3>École du Dimanche</h3>
+                    <p>Formation biblique adaptée pour les enfants de 3 à 12 ans.</p>
+                    <ul class="ministry-details">
+                        <li><i class="fas fa-clock"></i> Dimanche 9h00</li>
+                        <li><i class="fas fa-user"></i> Responsable: Sr. Marie</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Ministère de Louange -->
+            <div class="col-md-6 col-lg-4">
+                <div class="ministry-card">
+                    <div class="ministry-icon">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <h3>Louange</h3>
+                    <p>Équipe de musiciens et choristes dédiés à l'adoration.</p>
+                    <ul class="ministry-details">
+                        <li><i class="fas fa-clock"></i> Répétitions: Samedi 17h00</li>
+                        <li><i class="fas fa-user"></i> Responsable: Fr. David</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Ministère de Prière -->
+            <div class="col-md-6 col-lg-4">
+                <div class="ministry-card">
+                    <div class="ministry-icon">
+                        <i class="fas fa-pray"></i>
+                    </div>
+                    <h3>Intercession</h3>
+                    <p>Groupe de prière et d'intercession pour l'église et les besoins.</p>
+                    <ul class="ministry-details">
+                        <li><i class="fas fa-clock"></i> Mardi et Jeudi 18h00</li>
+                        <li><i class="fas fa-user"></i> Responsable: Sr. Sarah</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Ministère d'Évangélisation -->
+            <div class="col-md-6 col-lg-4">
+                <div class="ministry-card">
+                    <div class="ministry-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3>Évangélisation</h3>
+                    <p>Équipe dédiée à la diffusion de l'évangile et aux actions missionnaires.</p>
+                    <ul class="ministry-details">
+                        <li><i class="fas fa-clock"></i> Sorties: Samedi 10h00</li>
+                        <li><i class="fas fa-user"></i> Responsable: Fr. Pierre</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Ministère des Couples -->
+            <div class="col-md-6 col-lg-4">
+                <div class="ministry-card">
+                    <div class="ministry-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Couples et Familles</h3>
+                    <p>Accompagnement et enseignement pour les couples et les familles.</p>
+                    <ul class="ministry-details">
+                        <li><i class="fas fa-clock"></i> 1er Samedi du mois</li>
+                        <li><i class="fas fa-user"></i> Responsables: Couple Pastoral</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="ministry-cta text-center mt-5">
+            <h3>Vous souhaitez servir dans l'un de nos ministères ?</h3>
+            <p class="mb-4">Contactez-nous ou venez nous rencontrer après le culte</p>
+            <a href="{% url 'contact' %}" class="btn btn-primary btn-lg">Nous Contacter</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.ministry-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    height: 100%;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.ministry-card:hover {
+    transform: translateY(-5px);
+}
+
+.ministry-icon {
+    font-size: 2.5rem;
+    color: var(--bs-primary);
+    margin-bottom: 1.5rem;
+    height: 60px;
+    width: 60px;
+    line-height: 60px;
+    text-align: center;
+    border-radius: 50%;
+    background: rgba(var(--bs-primary-rgb), 0.1);
+}
+
+.ministry-card h3 {
+    color: var(--bs-primary);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.ministry-details {
+    list-style: none;
+    padding: 0;
+    margin-top: 1rem;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    padding-top: 1rem;
+}
+
+.ministry-details li {
+    margin-bottom: 0.5rem;
+    color: #666;
+}
+
+.ministry-details li i {
+    margin-right: 0.5rem;
+    color: var(--bs-primary);
+}
+
+.ministry-cta {
+    background: rgba(var(--bs-primary-rgb), 0.1);
+    padding: 3rem;
+    border-radius: 15px;
+    margin-top: 4rem;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--bs-primary);
+}
+
+.lead {
+    color: #666;
+}
+</style>
+{% endblock %} 

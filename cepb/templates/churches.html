@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header bg-primary text-white py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="display-4">Nos Églises</h1>
+                <div class="title-separator">
+                    <span></span>
+                    <i class="fas fa-church"></i>
+                    <span></span>
+                </div>
+                <p class="lead">Découvrez nos différentes assemblées</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Churches Grid -->
+<section class="churches-section py-5">
+    <div class="container">
+        <div class="row g-4">
+            {% for church in churches %}
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:1|stringformat:'d'}}00">
+                <div class="church-card">
+                    <div class="church-image">
+                        <img src="{{ church.image.url }}" alt="{{ church.name }}" class="img-fluid">
+                        <div class="church-overlay">
+                            <a href="{% url 'church_detail' church.id %}" class="btn btn-light">Voir Plus</a>
+                        </div>
+                    </div>
+                    <div class="church-content">
+                        <h3>{{ church.name }}</h3>
+                        <div class="church-info">
+                            <p><i class="fas fa-map-marker-alt"></i> {{ church.location }}</p>
+                            <p><i class="fas fa-user"></i> {{ church.pastor_name }}</p>
+                        </div>
+                        <div class="church-schedule">
+                            <h4>Horaires des Cultes</h4>
+                            <p>{{ church.service_time }}</p>
+                        </div>
+                        <div class="church-contact mt-3">
+                            <p><i class="fas fa-phone"></i> {{ church.phone }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <p>Aucune église n'est disponible pour le moment.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Contact CTA -->
+<section class="cta-section py-5 text-white text-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8" data-aos="fade-up">
+                <h2 class="mb-4">Vous souhaitez nous rejoindre ?</h2>
+                <p class="lead mb-4">Contactez-nous pour plus d'informations sur nos églises</p>
+                <a href="{% url 'contact' %}" class="btn btn-light btn-lg">Nous Contacter</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} 

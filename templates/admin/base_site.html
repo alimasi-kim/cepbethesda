@@ -1,0 +1,335 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}{{ title }} | CEPB Admin{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<style>
+/* Variables */
+:root {
+    --primary-color: #4CAF50;
+    --secondary-color: #2196F3;
+    --accent-color: #FFC107;
+    --dark-color: #1a1a2e;
+    --darker-color: #151528;
+    --light-color: #ffffff;
+    --success-color: #00c853;
+    --warning-color: #ffd600;
+    --error-color: #ff1744;
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --transition: all 0.3s ease;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Base Styles */
+body {
+    font-family: 'Poppins', sans-serif !important;
+    background: var(--dark-color) !important;
+    color: var(--light-color) !important;
+    line-height: 1.6 !important;
+}
+
+/* Header & Navigation */
+#header {
+    background: linear-gradient(135deg, var(--darker-color), var(--dark-color)) !important;
+    color: var(--light-color) !important;
+    padding: 1.5rem 2rem !important;
+    box-shadow: var(--shadow-md) !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+}
+
+#branding h1 {
+    font-weight: 700 !important;
+    font-size: 1.8rem !important;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+#branding h1::before {
+    content: '\f0ac' !important;
+    font-family: 'Font Awesome 6 Free' !important;
+    font-weight: 900 !important;
+    margin-right: 0.5rem !important;
+    font-size: 1.5rem !important;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+#user-tools {
+    font-size: 0.9rem !important;
+    background: var(--glass-bg) !important;
+    padding: 0.75rem 1.5rem !important;
+    border-radius: 50px !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid var(--glass-border) !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 1rem !important;
+}
+
+#user-tools a {
+    color: var(--light-color) !important;
+    text-decoration: none !important;
+    transition: var(--transition) !important;
+    padding: 0.25rem 0.75rem !important;
+    border-radius: 4px !important;
+}
+
+#user-tools a:hover {
+    background: var(--glass-bg) !important;
+    transform: translateY(-1px) !important;
+}
+
+/* Content Area */
+#content {
+    padding: 2rem !important;
+    background: linear-gradient(135deg, var(--darker-color), var(--dark-color)) !important;
+    min-height: 100vh !important;
+}
+
+/* Dashboard Modules */
+.module {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border-radius: 12px !important;
+    border: 1px solid var(--glass-border) !important;
+    backdrop-filter: blur(10px) !important;
+    margin-bottom: 2rem !important;
+    overflow: hidden !important;
+    transition: var(--transition) !important;
+}
+
+.module:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: var(--shadow-lg) !important;
+}
+
+.module h2 {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+    color: var(--light-color) !important;
+    padding: 1.25rem 1.5rem !important;
+    font-weight: 600 !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+}
+
+.module h2::before {
+    font-family: 'Font Awesome 6 Free' !important;
+    font-weight: 900 !important;
+}
+
+/* Module Icons */
+.module.auth h2::before { content: '\f509' !important; }
+.module.events h2::before { content: '\f073' !important; }
+.module.blog h2::before { content: '\f781' !important; }
+.module.gallery h2::before { content: '\f03e' !important; }
+.module.donations h2::before { content: '\f4b9' !important; }
+
+/* Tables */
+table {
+    width: 100% !important;
+    border-collapse: separate !important;
+    border-spacing: 0 0.5rem !important;
+    margin: 1rem 0 !important;
+}
+
+thead th {
+    background: rgba(255, 255, 255, 0.05) !important;
+    color: var(--light-color) !important;
+    padding: 1rem 1.5rem !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    font-size: 0.85rem !important;
+}
+
+tbody tr {
+    background: rgba(255, 255, 255, 0.02) !important;
+    transition: var(--transition) !important;
+}
+
+tbody tr:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
+    transform: scale(1.01) !important;
+}
+
+td {
+    padding: 1rem 1.5rem !important;
+    vertical-align: middle !important;
+}
+
+/* Forms */
+.form-row {
+    padding: 1.5rem !important;
+    border-bottom: 1px solid var(--glass-border) !important;
+    display: grid !important;
+    grid-template-columns: 200px 1fr !important;
+    gap: 2rem !important;
+    align-items: start !important;
+}
+
+.form-row label {
+    font-weight: 500 !important;
+    color: var(--light-color) !important;
+}
+
+.form-row input,
+.form-row select,
+.form-row textarea {
+    width: 100% !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid var(--glass-border) !important;
+    border-radius: 8px !important;
+    padding: 0.75rem 1rem !important;
+    color: var(--light-color) !important;
+    transition: var(--transition) !important;
+}
+
+.form-row input:focus,
+.form-row select:focus,
+.form-row textarea:focus {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2) !important;
+    outline: none !important;
+}
+
+/* Action Buttons */
+.submit-row {
+    padding: 1.5rem !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+    gap: 1rem !important;
+    background: transparent !important;
+    border: none !important;
+}
+
+.button, 
+input[type="submit"], 
+input[type="button"] {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)) !important;
+    color: var(--light-color) !important;
+    border: none !important;
+    padding: 0.75rem 1.5rem !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: var(--transition) !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+}
+
+.button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: var(--shadow-md) !important;
+}
+
+.deletelink {
+    background: linear-gradient(45deg, var(--error-color), #ff4081) !important;
+}
+
+/* Messages */
+.messagelist {
+    padding: 0 !important;
+    margin: 0 0 2rem 0 !important;
+}
+
+.messagelist li {
+    padding: 1rem 1.5rem !important;
+    margin-bottom: 0.5rem !important;
+    border-radius: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+}
+
+.messagelist li::before {
+    font-family: 'Font Awesome 6 Free' !important;
+    font-weight: 900 !important;
+}
+
+.messagelist li.success {
+    background: linear-gradient(45deg, rgba(0, 200, 83, 0.1), rgba(0, 200, 83, 0.2)) !important;
+    border-left: 4px solid var(--success-color) !important;
+}
+
+.messagelist li.success::before {
+    content: '\f00c' !important;
+    color: var(--success-color) !important;
+}
+
+.messagelist li.warning {
+    background: linear-gradient(45deg, rgba(255, 214, 0, 0.1), rgba(255, 214, 0, 0.2)) !important;
+    border-left: 4px solid var(--warning-color) !important;
+}
+
+.messagelist li.warning::before {
+    content: '\f071' !important;
+    color: var(--warning-color) !important;
+}
+
+.messagelist li.error {
+    background: linear-gradient(45deg, rgba(255, 23, 68, 0.1), rgba(255, 23, 68, 0.2)) !important;
+    border-left: 4px solid var(--error-color) !important;
+}
+
+.messagelist li.error::before {
+    content: '\f06a' !important;
+    color: var(--error-color) !important;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .form-row {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+    
+    #header {
+        padding: 1rem !important;
+    }
+}
+
+@media (max-width: 768px) {
+    #user-tools {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        text-align: center !important;
+}
+
+.submit-row {
+        flex-direction: column !important;
+}
+
+    .submit-row input {
+        width: 100% !important;
+}
+}
+</style>
+{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">
+    <a href="{% url 'admin:index' %}">
+        CEPB Administration
+    </a>
+</h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %} 
